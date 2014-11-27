@@ -13,3 +13,35 @@ descomprimes), y ejecutar la orden "runserver emergencias emergencias" (supongo 
 y el otro el nombre que le damos a la base de datos, pero no sé cual es cual).
 
 De momento hasta ahí. 
+
+He conseguido conectarme a la base de datos por medio del ConnectionManager que hace todo el papeleo y los DAO's 
+de Paciente, tanto la interfaz de los métodos sin implementar, como el DAO ya implementado y he ejecutado los 
+ejemplos que nos dicen en las transparencias. Se supone que el ejemplo debería hacer lo siguiente:
+   -1 Se busca un paciente y se crea si no existe
+      Paciente("10123456A", "Juan",
+         "Martinez Gandia", "Calle Santiago, 4 Valencia", 123453250,
+         50, 'H')
+
+
+   -2  Se busca un paciente y si lo encuentra se muestran sus datos
+      emergencias.buscarPaciente("10123456A");
+
+   -3 Se busca un paciente y si lo encuentra se muestran sus datos
+      emergencias.buscarPaciente("10123456A");
+
+   -4 Se crea un paciente
+      new Paciente("10123457A", "Pedro",
+         "Suecaz Santos", "Calle San Vicente, 4 Valencia", 123453251, 25,
+         'H')
+
+   -5 Se listan todos los pacientes
+      emergencias.ListarPacientes();
+
+Lo que da como salida por consola:
+   
+ 2 --> DNI: 10123456A Nombre: Juan Apellidos: Martinez Gandia Dirección: Calle Santiago, 4 Valencia Teléf.: 123453250 Edad: 50 Sexo: H
+ 3 --> DNI: 10123456A Nombre: Juan Apellidos: Martinez Gandia Dirección: Calle Santiago, 4 Valencia Teléf.: 123453250 Edad: 50 Sexo: H
+ 4 --> DNI: 10123456A Nombre: Juan Apellidos: Martinez Gandia Dirección: Calle Santiago, 4 Valencia Teléf.: 123453250 Edad: 50 Sexo: H
+ 4 --> DNI: 10123457A Nombre: Pedro Apellidos: Suecaz Santos Dirección: Calle San Vicente, 4 Valencia Teléf.: 123453251 Edad: 25 Sexo: H
+
+ Seems correct to me. Let's continue;
