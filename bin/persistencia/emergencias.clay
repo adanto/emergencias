@@ -75,8 +75,23 @@
 </primary-key>
 </table>
 <table id="14c1cba6:1497601f945:-7e82" name="BHospital">
-<column-list/>
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="318b3e1:149f2f60cf7:-7ab6" mandatory="true" name="numRegistro">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="318b3e1:149f2f60cf7:-7915" mandatory="true" name="nombre">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
 <primary-key id="14c1cba6:1497601f945:-7e81" name="PK_BHOSPITAL"/>
+<foreign-key-list>
+<foreign-key id="318b3e1:149f2f60cf7:-7ab8" name="FK_BHospital_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_AMBULANCIA" referenced-table="Ambulancia" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="numRegistro" referenced-key-column-name="numRegistro"/>
+</foreign-key>
+<foreign-key id="318b3e1:149f2f60cf7:-7917" name="FK_BHospital_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_HOSPITAL" referenced-table="Hospital" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="nombre" referenced-key-column-name="nombre"/>
+</foreign-key>
+</foreign-key-list>
 </table>
 <table id="14c1cba6:1497601f945:-7e7d" name="Especialidad">
 <column-list>
@@ -93,10 +108,18 @@
 <column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="14c1cba6:1497601f945:-7e45" mandatory="true" name="compañia">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="318b3e1:149f2f60cf7:-7c48" mandatory="true" name="numRegistro">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
 </column-list>
 <primary-key id="14c1cba6:1497601f945:-7e78" name="PK_PRIVADA">
 <primary-key-column name="compañia"/>
 </primary-key>
+<foreign-key-list>
+<foreign-key id="318b3e1:149f2f60cf7:-7c4a" name="FK_Privada_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_AMBULANCIA" referenced-table="Ambulancia" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="numRegistro" referenced-key-column-name="numRegistro"/>
+</foreign-key>
+</foreign-key-list>
 </table>
 <table id="14c1cba6:1497601f945:-7e71" name="RegistroEmergencia">
 <column-list>
@@ -119,10 +142,6 @@
 <primary-key id="14c1cba6:1497601f945:-7e70" name="PK_REGISTROEMERGENCIA">
 <primary-key-column name="id"/>
 </primary-key>
-</table>
-<table id="14c1cba6:1497601f945:-7e6d" name="ServicioEmergencia">
-<column-list/>
-<primary-key id="14c1cba6:1497601f945:-7e6c" name="PK_SERVICIOEMERGENCIA"/>
 </table>
 <table id="14c1cba6:1497601f945:-7e69" name="Sintoma">
 <column-list>
@@ -148,14 +167,13 @@
 </schema-list>
 </database-model>
 <diagram>
-<table-figure height="128" refid="14c1cba6:1497601f945:-7ffe" width="139" x="210" y="281"/>
-<table-figure height="99" refid="14c1cba6:1497601f945:-7ff9" width="133" x="11" y="9"/>
-<table-figure height="91" refid="14c1cba6:1497601f945:-7ff5" width="134" x="53" y="197"/>
-<table-figure height="69" refid="14c1cba6:1497601f945:-7e82" width="136" x="197" y="12"/>
-<table-figure height="71" refid="14c1cba6:1497601f945:-7e7d" width="132" x="409" y="10"/>
-<table-figure height="114" refid="14c1cba6:1497601f945:-7e79" width="130" x="407" y="280"/>
-<table-figure height="101" refid="14c1cba6:1497601f945:-7e71" width="130" x="1" y="506"/>
-<table-figure height="90" refid="14c1cba6:1497601f945:-7e6d" width="141" x="194" y="517"/>
-<table-figure height="93" refid="14c1cba6:1497601f945:-7e69" width="129" x="407" y="497"/>
+<table-figure height="128" refid="14c1cba6:1497601f945:-7ffe" width="139" x="590" y="184"/>
+<table-figure height="99" refid="14c1cba6:1497601f945:-7ff9" width="133" x="186" y="28"/>
+<table-figure height="91" refid="14c1cba6:1497601f945:-7ff5" width="134" x="102" y="376"/>
+<table-figure height="69" refid="14c1cba6:1497601f945:-7e82" width="136" x="267" y="260"/>
+<table-figure height="71" refid="14c1cba6:1497601f945:-7e7d" width="132" x="459" y="352"/>
+<table-figure height="114" refid="14c1cba6:1497601f945:-7e79" width="130" x="36" y="218"/>
+<table-figure height="101" refid="14c1cba6:1497601f945:-7e71" width="130" x="423" y="168"/>
+<table-figure height="93" refid="14c1cba6:1497601f945:-7e69" width="129" x="593" y="34"/>
 </diagram>
 </clay-model>
