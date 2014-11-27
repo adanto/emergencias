@@ -45,3 +45,15 @@ Lo que da como salida por consola:
  4 --> DNI: 10123457A Nombre: Pedro Apellidos: Suecaz Santos Dirección: Calle San Vicente, 4 Valencia Teléf.: 123453251 Edad: 25 Sexo: H
 
  Seems correct to me. Let's continue;
+
+28/11/2014 0:04 
+   He obtenido la forma de hacer consultas a la base de datos que efectivamente debe estar cargada y preparada para funcionar. 
+   La consistencia ha sido un éxito. Tanto como si reiniciamos el servidor como si nos desconectamos de la base de datos y 
+   volvemos a conectarnos más tarde la persistencia perdura, que es lo que buscabamos. Ahora tan sólo queda realizar la interfaz
+   de usuario y añadir los controladores y las interfacces de las demás clases que tiene gestión externa en sobre la base de datos
+   y por último crear una posible clase principal que controle todo y nos de las opciones a las que el usuario tiene acceso. 
+
+   IMPORTANTE CARGAR LA BASE DE DATOS CADA VEZ QUE VAMOS A EJECUTAR TESTEOS. 
+
+   SERIA CONVENIENTE UNA RAMA DE PRUEBAS PARA IR AÑADIENDO LAS INTERFACES Y COMPROBANDO EL CORRECTO FUNCIONAMIENTOY LA INCORPORACIÓN
+   DE OTRA PARTE DE DESARROLLADORES.
