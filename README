@@ -1,0 +1,15 @@
+PRACTICA EMERGENCIAS
+
+Para crear la base de datos primero hay que crear con el Clay (mal empezamos) la estructura de tablas que tendrá
+la base de datos relacional una vez la inicialicemos en el servidor. Para esto sólo hay que crearla con las 
+herramientas que proporciona y una vez listas todas las tablas, generar el script .sql para que se ejecute en el
+servidor y cree las tablas verdaderas. 
+
+Una vez tenemos el script hay que lanzarlo en el servidor. Para esto primero hay que descomprimirlo en algún 
+directorio (no hace falta que sea el mismo que ninguna otra cosa), cargar el archivo bin/runServer.bat y luego
+cargarlo con los argumentos que necesita desde el termianl.
+Yo lo he hecho desde el cmd de windows yendo al directorio donde lo he instalado (se autoinstala donde lo
+descomprimes), y ejecutar la orden "runserver emergencias emergencias" (supongo que uno es el nombre del script
+y el otro el nombre que le damos a la base de datos, pero no sé cual es cual).
+
+De momento hasta ahí. 
