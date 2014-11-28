@@ -12,5 +12,9 @@ public class Especialidad {
 		this.nombre = nombre;
 	}
 	
+	public Especialidad(String nombre){
+		this.nombre=nombre;
+	}
+	
 
 }

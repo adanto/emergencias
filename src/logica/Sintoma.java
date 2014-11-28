@@ -23,7 +23,7 @@ public class Sintoma {
 	public String getDescripcion() {return descripcion;}
 	public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
-	public ArrayList<RegistroEmergencia> registrosSincotma(){
+	public ArrayList<RegistroEmergencia> registroSintoma(){
 		return registros;
 		}
 	

@@ -3,7 +3,7 @@ package persistencia;
 import java.util.List;
 
 import excepciones.*;
-import logica.Paciente;;
+import logica.Paciente;
 
 public interface IPacienteDAO {
 	public Paciente buscarPaciente(String dni)throws DAOExcepcion;

@@ -65,7 +65,7 @@ public class PacienteDAOImp implements IPacienteDAO {
 			connManager.close();
 		
 			if (rs.next())
-				return new Paciente(dni,rs.getString("NOMBRE"),rs.getString("APELLIDOS"), rs.getString("DIRECCION"),rs.getInt("TELEFONO"),rs.getInt("EDAD"),rs.getString("SEXO").charAt(0));
+				return new Paciente(dni,rs.getString("NOMBRE"),rs.getString("APELLIDOS"), rs.getString("DIRECCION"),rs.getString("TELEFONO"),rs.getInt("EDAD"), rs.getString("SEXO").charAt(0));
 			else
 				return null;	
 		}

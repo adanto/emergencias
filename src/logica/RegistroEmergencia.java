@@ -21,6 +21,20 @@ public class RegistroEmergencia {
 	public String getHora() {return hora;}
 	public void setHora(String hora) {this.hora = hora;}
 	
+	
+
+	public Sintoma buscarSintoma(String nom){
+		Sintoma sint = null;
+		
+		for(int i=0; i<sintoma.size() && sint==null; i++){
+			if(sintoma.get(i).getNombre().compareTo(nom)==0){
+				sint=sintoma.get(i);
+			}
+		}
+		return sint;
+	}
+		
+		
 	public ArrayList<Sintoma> sintomasPaciente(){
 		return sintoma;
 		}

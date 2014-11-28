@@ -5,8 +5,15 @@ private int numRegistro;
 private String equipo;
 private double latitud;
 private double longitud;
+private String compañia;
 
-
+public Privada(String compañia, String equipo, int numero, float latitud, float longitud){
+	this.compañia = compañia;
+	this.equipo = equipo;
+	this.numRegistro = numero;
+	this.latitud = latitud;
+	this.longitud = longitud;
+}
 
 public String getEquipo() {
 return equipo;
