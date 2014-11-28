@@ -136,7 +136,7 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return p;
 }
 	
-	public Iterator<Paciente>getPatients() throws LogicaExcepcion
+	public Iterator<Paciente> getPatients() throws LogicaExcepcion
 	{
 		try
 		{

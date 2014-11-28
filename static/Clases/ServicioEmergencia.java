@@ -1,62 +1,169 @@
 package logica;
-
+import java.util.Iterator;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import excepciones.DAOExcepcion;
-import persistencia.IPacienteDAO;
-import persistencia.PacienteDAOImp;
+import excepciones.LogicaExcepcion;
+import persistencia.DAL;
+
 
 public class ServicioEmergencia {
-	private HashMap<String, Paciente> listaPacientes;
+
+	private ArrayList <Hospital> hospitales;
+	private ArrayList <Ambulancia> ambulancias;
+	private ArrayList <RegistroEmergencia> registros;
+	private HashMap <String,Paciente> pacientes;
+	private DAL dal;
 	
-	//Objeto para la comunicación con persistencia
-	private IPacienteDAO pacienteDAO; 
+public ServicioEmergencia() throws LogicaExcepcion
+{
+	this.pacientes = new HashMap<String,Paciente>();
+	this.dal = DAL.getSingleton();
+}
 	
-	public ServicioEmergencia() throws DAOExcepcion {
-		this.listaPacientes = new HashMap<String, Paciente>();
-		this.pacienteDAO= new PacienteDAOImp();
-	}
-	
-	public void añadirPaciente(Paciente paciente) throws DAOExcepcion
+	public void anyadir(Hospital b)
 	{
-		//Buscamos el paciente
-		if (buscarPaciente(paciente.getDni())==null)
-		{
-			//Si no lo tenemos lo añadimos
-			this.listaPacientes.put(paciente.getDni(), paciente);
-			pacienteDAO.crearPaciente(paciente);
-		}	
+		hospitales.add(b);
 	}
-	
-	public Paciente buscarPaciente(String dni) throws DAOExcepcion
-	{		
-		//Busco el paciente en memoria
-		Paciente paciente = this.listaPacientes.get(dni);
-		
-		//El paciente no esta en memoria, se busca en la BD
-		if (paciente==null)
+	public void anyadir(Paciente p) throws LogicaExcepcion
+	{
+		if(!this.pacientes.containsKey(p.getDni()))
+		try
 		{
-			paciente = pacienteDAO.buscarPaciente(dni);
-			
-			//Si lo he encontrado en la BD, lo añado a memoria porque no lo tenía
-			if (paciente != null) this.listaPacientes.put(dni, paciente);
+			DAL.getSingleton().crearPaciente(p);
+			pacientes.put(p.getDni(),p);
+		}catch(DAOExcepcion e)
+		{
+			e.printStackTrace();
 		}
-		
-		//Devuelvo el paciente que he encontrado o null en caso contrario
-		return paciente;
+	}
+	public void anyadir(Ambulancia r)
+	{
+		ambulancias.add(r);
+	}
+	public void anyadir(RegistroEmergencia q)
+	{
+		registros.add(q);
+	}
+
+	public void borrar(Hospital b)
+	{
+		hospitales.remove(b);
+	}
+	public void borrar(Ambulancia r)
+	{
+		ambulancias.remove(r);
 	}
 	
-	public List<Paciente> ListarPacientes() throws DAOExcepcion
+	public void borrar(Paciente p)
 	{
-		//Se obtienen los pacientes de la BD, porque no hay ninguna garantía de tenerlos todos en memoria
-		List<Paciente> lista = pacienteDAO.listarPacientes();
-		
-		//Para cada paciente de la BD, si no esta en memoria lo añadimos
-		for(Paciente p:lista)
-			if (this.listaPacientes.containsKey(p.getDni())) this.listaPacientes.put(p.getDni(), p);
-		return new ArrayList<Paciente>(listaPacientes.values());
+		pacientes.remove(p);
 	}
-		
+	
+	public void borrar(RegistroEmergencia h)
+	{
+		registros.remove(h);
+	}
+	
+
+	public Hospital buscarH(String nombre)
+	{
+		Hospital salida = null;
+		for(Hospital elemento: hospitales)
+		{
+			if(elemento.getNombre().equals(nombre)) { salida = elemento; }
+		}
+		return salida;		
+	}
+	
+	public Ambulancia buscarA(int numero)
+	{
+		Ambulancia a = this.ambulancias.get(numero);
+		if(a == null)
+		{
+			try{
+				a = DAL.getSingleton().buscarAmbulancia(numero);
+				if(a != null)
+				{
+					this.ambulancias.add(numero,a);
+				}
+			}catch(LogicaExcepcion e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return a;
+	}
+	
+	public void cambiarCoor(int numero, float latitud, float longitud)
+	{
+		Ambulancia a = this.ambulancias.get(numero);
+		if(a == null)
+		{
+			try{
+				a = DAL.getSingleton().buscarAmbulancia(numero);
+				if(a != null)
+				{
+					a.cambiarCoordenadas(numero, latitud, longitud);
+				}
+			}catch(LogicaExcepcion e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public Paciente buscarP(String dni) throws LogicaExcepcion
+	{
+		Paciente p = this.pacientes.get(dni);
+
+		if(p==null)
+		{
+			try{
+				p = DAL.getSingleton().buscarPaciente(dni);
+			if(p!=null)
+			{
+				this.pacientes.put(dni, p);
+			}
+		}
+			catch(LogicaExcepcion e)
+			{
+				e.printStackTrace();
+			}
+	}
+		return p;
+}
+	
+	public Iterator<Paciente>getPatients() throws LogicaExcepcion
+	{
+		try
+		{
+			List<Paciente>dbPacientes = dal.listarPacientes();
+		for (Paciente p : dbPacientes)
+			if(!this.pacientes.containsKey(p.getDni()))
+			{
+				this.pacientes.put(p.getDni(),p);
+			}
+		}
+		catch(LogicaExcepcion e)
+		{
+		  e.printStackTrace(); 
+		  throw new LogicaExcepcion("La lista no puede ser recuperada");
+		}
+		return this.pacientes.values().iterator();
+	}
+	
+	
+	public RegistroEmergencia buscar(float latitud, float longitud)
+	{
+		RegistroEmergencia salida = null;
+		for(RegistroEmergencia elemento: registros)
+		{
+			if(elemento.getLatitud()==latitud && elemento.getLongitud()==longitud) 
+			{ salida = elemento; }
+		}
+		return salida;
+	}
 }
