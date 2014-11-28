@@ -16,7 +16,6 @@ public class Hospital {
 	
 	ArrayList<RegistroEmergencia> misEmergencias;
 	
-	
 	public Hospital(String nombre, String direccion, double latitud, double longitud){
 		this.nombre=nombre;
 		this.direccion=direccion;

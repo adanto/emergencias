@@ -22,7 +22,9 @@ public class Aplicacion {
 			System.out.println("\nSeleccione su opción\n");
 			System.out.println("1 - Buscar paciente, si no está lo crea y luego lo busca");
 			System.out.println("2 - Busca paciente, si está lo muestra, añade un paciente y los imprime todos");
-			System.out.println("3 - Añade paciente y los lista todos\n");
+			System.out.println("3 - Añade paciente y los lista todos");
+			System.out.println("4 - Elimina el de la primera opción");
+			System.out.println("5 - Mostrar todos listados\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -84,6 +86,30 @@ public class Aplicacion {
 									" Edad: "+pac.getEdad()+" Sexo: "+pac.getSexo());
 				}
 				break;
+			case 4:
+				//Cuarta ejecución
+				emergencias.borrar(new Paciente("10123456A", "Juan",
+						"Martinez Gandia", "Calle Santiago, 4 Valencia", 123453250,
+						50, 'H'));
+				break;
+			case 5:
+				Iterator<Paciente> listaPacientes5 = emergencias.getPatients();
+				while(listaPacientes5.hasNext()){
+					Paciente pac = listaPacientes5.next();
+					listaPacientes5.remove();
+						System.out.println(" DNI: "+pac.getDni()+
+									" Nombre: "+pac.getNombre()+" Apellidos: "+pac.getApellidos()+
+									" Dirección: "+pac.getDireccion()+" Teléf.: "+pac.getTelefono()+
+									" Edad: "+pac.getEdad()+" Sexo: "+pac.getSexo());
+				}
+				break;
+				
+			}
+			
+			try {
+			    Thread.sleep(3000);                 
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
 			}
 		}
 

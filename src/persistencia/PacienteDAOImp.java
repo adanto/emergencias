@@ -37,6 +37,21 @@ public class PacienteDAOImp implements IPacienteDAO {
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);}
 	}
+
+	
+	public void borrarPaciente(Paciente pa) throws DAOExcepcion {
+	// TODO Auto-generated method stub			
+		try{
+			System.out.println("DAO");
+			connManager.connect();
+			connManager.updateDB("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
+			System.out.println("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
+			connManager.close();
+		}
+		catch (Exception e){	
+			System.out.println("No se pudo eliminar desde el DAO");
+			throw new DAOExcepcion(e);}
+	}
 	  
 	public List <Paciente> listarPacientes() throws DAOExcepcion{
 		try{
@@ -71,4 +86,5 @@ public class PacienteDAOImp implements IPacienteDAO {
 		}
 		catch (SQLException e){	throw new DAOExcepcion(e);}	
 	}
+
 }

@@ -39,6 +39,19 @@ public ServicioEmergencia() throws LogicaExcepcion
 			e.printStackTrace();
 		}
 	}
+	public void borrar(Paciente p) throws LogicaExcepcion
+	{
+		if(this.pacientes.containsKey(p.getDni())){
+			try{
+				System.out.println("Hemos llegado a borrar");
+				DAL.getSingleton().borrarPaciente(p);
+				pacientes.remove(p);
+			}catch(DAOExcepcion e)
+			{	
+				e.printStackTrace();
+			}
+		}
+	}
 	public void anyadir(Ambulancia r)
 	{
 		ambulancias.add(r);
@@ -57,10 +70,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 		ambulancias.remove(r);
 	}
 	
-	public void borrar(Paciente p)
-	{
-		pacientes.remove(p);
-	}
 	
 	public void borrar(RegistroEmergencia h)
 	{

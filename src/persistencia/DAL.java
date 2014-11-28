@@ -50,6 +50,19 @@ public class DAL {
 			throw new DAOExcepcion("No se pudo crear el paciente.");
 		}
 	}
+
+	public void borrarPaciente(Paciente p) throws DAOExcepcion 
+	{
+		try
+		{
+		pacienteDAO = new PacienteDAOImp();
+		pacienteDAO.borrarPaciente(p);
+		}catch(DAOExcepcion e)
+		{
+			throw new DAOExcepcion("No se pudo borrar el paciente.");
+		}
+	}
+	
 	public List<Paciente> listarPacientes() throws LogicaExcepcion
 	{
 		try
