@@ -10,6 +10,12 @@ public class Sintoma {
 	private String nombre="";
 	ArrayList<RegistroEmergencia> registros= new ArrayList<RegistroEmergencia>();
 	
+	public Sintoma(String nombre, String desc, int duracion, String est){
+		this.nombre=nombre;
+		this.descripcion=desc;
+		this.duracion = duracion;
+		this.estado=est;
+	}
 	public String getEstado() {return estado;}
 	public void setEstado(String estado) {this.estado = estado;}
 	public int getDuracion() {return duracion;}
