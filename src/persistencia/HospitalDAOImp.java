@@ -5,12 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import logica.Ambulancia;
-import logica.BHospital;
 import logica.Especialidad;
 import logica.Hospital;
-import logica.Paciente;
-import logica.Privada;
 import excepciones.DAOExcepcion;
 
 public class HospitalDAOImp implements IHospital{

@@ -14,7 +14,9 @@ public Privada(String compañia, String equipo, int numero, float latitud, float 
 	this.latitud = latitud;
 	this.longitud = longitud;
 }
-
+public String getCompañia(){
+	return this.compañia;
+}
 public String getEquipo() {
 return equipo;
 }

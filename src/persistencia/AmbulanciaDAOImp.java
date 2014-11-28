@@ -2,12 +2,7 @@ package persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import persistencia.HospitalDAOImp;
 import logica.Ambulancia;
-import logica.BHospital;
-import logica.Hospital;
-import logica.Paciente;
-import logica.Privada;
 import excepciones.DAOExcepcion;
 
 public class AmbulanciaDAOImp implements IAmbulanciaDAO{

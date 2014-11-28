@@ -1,7 +1,6 @@
 package persistencia;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import logica.Ambulancia;
 import logica.Paciente;
