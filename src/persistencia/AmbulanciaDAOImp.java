@@ -27,19 +27,10 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	try{
 		connManager.connect();
 		ResultSet rs=connManager.queryDB("select * from AMBULANCIA where numero= '"+numero+"'");
-		ResultSet rs2=connManager.queryDB("select COUNT(*) from AMBULANCIA A, PRIVADA P where A.NUMREGISTRO = P.NUMREGISTRO");
-		ResultSet rs3=connManager.queryDB("select * from HOSPITAL H, BHOSPITAL B where B.idhospital = H.nombre");
 		connManager.close();
 	
 		if (rs.next()){
-			if(rs2.equals(1))
-			{
-				return new Privada(rs.getString("compañia"),rs.getString("equipo"),rs.getInt(numero), rs.getFloat("latitud"), rs.getFloat("longitud"));
-			}
-			else if(rs2.equals(0))
-			{
-				return new BHospital(new Hospital(rs3.getString("nombre"), rs3.getString("direccion"),rs3.getFloat("LATITUD"), rs3.getFloat("LONGITUD")), rs.getString("equipo"),rs.getInt(numero), rs.getFloat("latitud"), rs.getFloat("longitud"));
-			}
+			return new Ambulancia(rs.getInt("NUMREGISTRO"),rs.getString("EQUIPO"),rs.getFloat("LATITUD"), rs.getFloat("LONGITUD"));
 		}
 		 
 	}
@@ -52,17 +43,6 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 		try{
 			connManager.connect();
 			connManager.updateDB("insert into AMBULANCIA (numregistro,equipo,latitud,longitud) values ('"+a.getNumRegistro()+"','"+a.getEquipo()+"','"+a.getLatitud()+"', '"+a.getLongitud()+"')");
-			if(a instanceof Privada) 
-			{
-				Privada amb = (Privada)a;
-				connManager.updateDB("insert into PRIVADA (numregistro, compañia) values ('"+a.getNumRegistro()+"','"+amb.getCompanyia()+"')");
-			}
-			else 
-			{
-				BHospital amb = (BHospital)a;
-				connManager.updateDB("insert into BHOSPITAL (numregistro, idhospital) values ('"+a.getNumRegistro()+"','"+amb.getNumRegistro()+"')");
-			
-			}
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);	}

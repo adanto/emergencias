@@ -9,7 +9,12 @@ private double latitud;
 private double longitud;
 
 
-
+public Ambulancia(int numRegistro, String equipo, double latitud, double longitud){
+	this.numRegistro=numRegistro;
+	this.equipo=equipo;
+	this.latitud=latitud;
+	this.longitud=longitud;
+}
 public String getEquipo() {
 	return equipo;
 }
@@ -33,5 +38,10 @@ public double getLongitud() {
 }
 public void setLongitud(double longitud) {
 	this.longitud = longitud;
+}
+public void cambiarCoordenadas(int numero, float latitud2, float longitud2) {
+	this.latitud=latitud2;
+	this.longitud=longitud2;
+	
 }
 }
