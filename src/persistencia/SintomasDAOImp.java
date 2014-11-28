@@ -33,30 +33,31 @@ public class SintomasDAOImp implements ISintomasDAO {
 			ResultSet rs=connManager.queryDB("select * from SINTOMA");						
 			connManager.close();
 	  	  
-			List<Sintoma> listaSintoma=new ArrayList<Paciente>();
+			List<Sintoma> listaSintoma=new ArrayList<Sintoma>();
 				
 			try{				
 				while (rs.next()){
-					Paciente pa = buscarPaciente(rs.getString("DNI"));	 
-					listaPacientes.add(pa);
+					Sintoma pa = buscarSintoma(rs.getString("NOMBRE"));	 
+					listaSintoma.add(pa);
 				}
-				return listaPacientes;
+				return listaSintoma;
 				}
 			catch (Exception e){	throw new DAOExcepcion(e);}
 			}
 		catch (DAOExcepcion e){		throw e;}	
 	 }
 	  
-	public Paciente buscarPaciente(String dni)throws DAOExcepcion{
+	public Sintoma buscarSintoma(String nombre)throws DAOExcepcion{
 		try{
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("select * from PACIENTE where DNI= '"+dni+"'");
+			ResultSet rs=connManager.queryDB("select * from SINTOMA where NOMBRE= '"+nombre+"'");
 			connManager.close();
 		
 			if (rs.next())
-				return new Paciente(dni,rs.getString("NOMBRE"),rs.getString("APELLIDOS"), rs.getString("DIRECCION"),rs.getInt("TELEFONO"),rs.getInt("EDAD"),rs.getString("SEXO").charAt(0));
+				return new Sintoma(nombre, rs.getString("DESCRIPCION"), rs.getInt("DURACION"), rs.getString("ESTADO"));
 			else
 				return null;	
 		}
 		catch (SQLException e){	throw new DAOExcepcion(e);}	
 	}
+}
