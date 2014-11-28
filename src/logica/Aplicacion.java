@@ -90,6 +90,8 @@ public class Aplicacion {
 				break;
 			case 4:
 				//Cuarta ejecución
+
+				if (emergencias.buscarP("10123456A")!=null)
 				emergencias.borrar(new Paciente("10123456A", "Juan",
 						"Martinez Gandia", "Calle Santiago, 4 Valencia", 123453250,
 						50, 'H'));
