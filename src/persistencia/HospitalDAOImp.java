@@ -16,7 +16,7 @@ public class HospitalDAOImp implements IHospital{
 	public HospitalDAOImp() throws DAOExcepcion {
 		super();
 		try{
-			connManager= new ConnectionManager("emergenciasBD");
+			connManager= new ConnectionManager("emergencias");
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}

@@ -12,7 +12,7 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	public AmbulanciaDAOImp() throws DAOExcepcion {
 		super();
 		try{
-			connManager= new ConnectionManager("emergenciasBD");
+			connManager= new ConnectionManager("emergencias");
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}
