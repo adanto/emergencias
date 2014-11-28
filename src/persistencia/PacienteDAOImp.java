@@ -42,7 +42,6 @@ public class PacienteDAOImp implements IPacienteDAO {
 	public void borrarPaciente(Paciente pa) throws DAOExcepcion {
 	// TODO Auto-generated method stub			
 		try{
-			System.out.println("DAO");
 			connManager.connect();
 			connManager.updateDB("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
 			System.out.println("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");

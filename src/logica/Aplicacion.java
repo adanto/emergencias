@@ -1,4 +1,5 @@
 package logica;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -39,6 +40,7 @@ public class Aplicacion {
 				//Se busca un paciente y si lo encuentra se muestran sus datos
 				Paciente p = emergencias.buscarP("10123456A");
 				if (p!=null)
+					
 				System.out.println(" DNI: "+p.getDni()+" Nombre: "+p.getNombre()+
 				" Apellidos: "+p.getApellidos()+
 				" Dirección: "+p.getDireccion()+" Teléf.: "+p.getTelefono()+
@@ -106,11 +108,6 @@ public class Aplicacion {
 				
 			}
 			
-			try {
-			    Thread.sleep(3000);                 
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}
 		}
 
 		
