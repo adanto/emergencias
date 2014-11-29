@@ -107,11 +107,7 @@ public class Aplicacion {
 									" Edad: "+pac.getEdad()+" Sexo: "+pac.getSexo());
 				}
 				break;
-				
 			}
-			
 		}
-
-		
 	}
 }
