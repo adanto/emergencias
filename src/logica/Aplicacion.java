@@ -25,7 +25,9 @@ public class Aplicacion {
 			System.out.println("2 - Busca paciente, si está lo muestra, añade un paciente y los imprime todos");
 			System.out.println("3 - Añade paciente y los lista todos");
 			System.out.println("4 - Elimina el de la primera opción");
-			System.out.println("5 - Mostrar todos listados\n");
+			System.out.println("5 - Mostrar todos listados");
+			System.out.println("6 - Buscar ambulancia. Si no está la añade");
+			System.out.println("7 - Número de ambulancias\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -107,6 +109,16 @@ public class Aplicacion {
 									" Edad: "+pac.getEdad()+" Sexo: "+pac.getSexo());
 				}
 				break;
+			case 6:
+				//emergencias.buscarA(new Ambulancia(1, "Equipo1", 12.3, 31.2, true));
+				emergencias.buscarA(new Ambulancia(3, "Equipo1", 12.3, 31.2, true));
+				
+				break;
+			case 7:
+				emergencias.numeroAmbulancias();
+				break;
+			case 8:
+				emergencias.listaAmbulancias();
 			}
 		}
 	}

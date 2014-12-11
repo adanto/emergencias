@@ -83,12 +83,32 @@ public class EmergenciasApp {
 		menuBar.add(mnConductor);
 		
 		JMenuItem mntmCambiarCoordenadas = new JMenuItem("Cambiar Coordenadas");
+		mntmCambiarCoordenadas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CambiarCoor a = new CambiarCoor(); 
+				a.show();
+				frame.dispose();
+			}
+		});
 		mnConductor.add(mntmCambiarCoordenadas);
 		
 		JSeparator separator_1 = new JSeparator();
 		mnConductor.add(separator_1);
 		
 		JMenuItem mntmCambiarDisponibilidad = new JMenuItem("Cambiar Disponibilidad");
+		mntmCambiarDisponibilidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CambiaDisp c=new CambiaDisp();
+				c.show();
+				frame.dispose();
+			}
+		});
+		mntmCambiarDisponibilidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frame.dispose();
+			}
+		});
 		mnConductor.add(mntmCambiarDisponibilidad);
 		
 		JMenu mnNewMenu = new JMenu("Personal comision");

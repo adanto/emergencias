@@ -15,11 +15,14 @@ public class ServicioEmergencia {
 	private ArrayList <Ambulancia> ambulancias;
 	private ArrayList <RegistroEmergencia> registros;
 	private HashMap <String,Paciente> pacientes;
+	private ArrayList <Especialidad> especialidad;
 	private DAL dal;
 	
 public ServicioEmergencia() throws LogicaExcepcion
 {
 	this.pacientes = new HashMap<String,Paciente>();
+	this.especialidad=new ArrayList<Especialidad>();
+	this.ambulancias = new ArrayList<Ambulancia>();
 	this.dal = DAL.getSingleton();
 }
 	
@@ -39,6 +42,15 @@ public ServicioEmergencia() throws LogicaExcepcion
 			e.printStackTrace();
 		}
 	}
+	public void listaAmbulancias(){
+		for(int i = 0; i<ambulancias.size(); i++){
+			Ambulancia A = ambulancias.get(i);
+			if(A!=null){
+				System.out.println("Numero = "+A.getEquipo()+" y numRegistro "+A.getNumRegistro());
+			}
+		}
+	}
+	
 	public void borrar(Paciente p) throws LogicaExcepcion
 	{
 		if(this.pacientes.containsKey(p.getDni())){
@@ -87,23 +99,24 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return salida;		
 	}
 	
-	public Ambulancia buscarA(int numero)
+	public Ambulancia buscarA(int A) throws LogicaExcepcion
 	{
-		Ambulancia a = this.ambulancias.get(numero);
-		if(a == null)
+		Ambulancia amb = null;
+		if(!ambulancias.contains(A))
 		{
+			System.out.println(ambulancias.contains(A));
 			try{
-				a = DAL.getSingleton().buscarAmbulancia(numero);
-				if(a != null)
+				amb = DAL.getSingleton().buscarAmbulancia(A.getNumRegistro());
+				if(amb == null)
 				{
-					this.ambulancias.add(numero,a);
+					this.ambulancias.add(A);
 				}
 			}catch(LogicaExcepcion e)
 			{
 				e.printStackTrace();
 			}
 		}
-		return a;
+		return amb;
 	}
 	
 	public void cambiarCoor(int numero, float latitud, float longitud)
@@ -122,6 +135,27 @@ public ServicioEmergencia() throws LogicaExcepcion
 				e.printStackTrace();
 			}
 		}
+	}
+	public void setDisp(int numero, boolean disp) throws LogicaExcepcion
+	{
+		//Ambulancia a = this.buscarA(numero);
+		Ambulancia a = this.ambulancias.get(numero);
+		if(a == null)
+		{
+			try{
+				a = DAL.getSingleton().buscarAmbulancia(numero);
+				if(a != null)
+				{
+					a.setDisp(numero, disp);
+				}
+			}catch(LogicaExcepcion e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	public void numeroAmbulancias(){
+		System.out.print(this.ambulancias.size());
 	}
 	
 	public Paciente buscarP(String dni) throws LogicaExcepcion
@@ -174,5 +208,23 @@ public ServicioEmergencia() throws LogicaExcepcion
 			{ salida = elemento; }
 		}
 		return salida;
+	}
+	public List<Especialidad> listarEspecialidad(String nombre){
+		
+		try
+		{
+			List<Especialidad>dbEspecialidad = dal.listarEspecialidad(nombre);
+		for (Especialidad p : dbEspecialidad)
+			if(!this.especialidad.contains(p.getNombre()))
+			{
+				this.especialidad.add(p);
+			}
+		}
+		catch(LogicaExcepcion e)
+		{
+		  e.printStackTrace(); 
+		 
+		}
+		return this.especialidad;
 	}
 }

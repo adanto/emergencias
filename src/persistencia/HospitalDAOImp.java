@@ -68,14 +68,14 @@ public class HospitalDAOImp implements IHospital{
 	public List <Especialidad> listaEspecialidad(String nombre) throws DAOExcepcion{
 		try{
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("select * from Atiende where IDHOSPITAL= '"+nombre+"'");						
+			ResultSet rs=connManager.queryDB("select DISTINCT E.id from hospital A, especialidad E where A.nombre='"+nombre+"' and  E.nombre = A.nombre ");						
 			connManager.close();
 	  	  
 			List<Especialidad> listaEspecialidad=new ArrayList<Especialidad>();
 				
 			try{				
 				while (rs.next()){
-					Especialidad e=new Especialidad(rs.getString("IDESPECIALIDAD"));
+					Especialidad e= buscaEspecialidad(rs.getString("ID"));
 					listaEspecialidad.add(e);
 				}
 				return listaEspecialidad;
@@ -85,4 +85,17 @@ public class HospitalDAOImp implements IHospital{
 		catch (DAOExcepcion e){		throw e;}	
 	 }
 	
+	public Especialidad buscaEspecialidad(String nombre)throws DAOExcepcion{
+		try{
+			connManager.connect();
+			ResultSet rs=connManager.queryDB("select * from Especialidad where ID= '"+nombre+"'");
+			connManager.close();
+		
+			if (rs.next())
+				return new Especialidad(nombre);
+			else
+				return null;	
+		}
+		catch (SQLException e){	throw new DAOExcepcion(e);}	
+	}
 }

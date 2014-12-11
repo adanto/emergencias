@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import logica.Ambulancia;
 import logica.ServicioEmergencia;
 
 public class CambiarCoor extends JDialog {
@@ -25,6 +26,7 @@ public class CambiarCoor extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -43,7 +45,7 @@ public class CambiarCoor extends JDialog {
 	 * Create the dialog.
 	 */
 	public CambiarCoor() {
-		setBounds(100, 100, 340, 176);
+		setBounds(100, 100, 340, 296);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -82,11 +84,27 @@ public class CambiarCoor extends JDialog {
 			textField_2.setColumns(10);
 		}
 		{
+			textField_3 = new JTextField();
+			textField_3.setEditable(false);
+			textField_3.setBounds(32, 159, 255, 38);
+			contentPanel.add(textField_3);
+			textField_3.setColumns(10);
+		}
+		{
+			JLabel lblAmbulanciaModificada = new JLabel("Ambulancia Modificada");
+			lblAmbulanciaModificada.setBounds(32, 139, 127, 14);
+			contentPanel.add(lblAmbulanciaModificada);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
@@ -96,6 +114,11 @@ public class CambiarCoor extends JDialog {
 							float latitud=Float.parseFloat(textField_1.getText());
 							float longitud=Float.parseFloat(textField_2.getText());
 							s.cambiarCoor(numero, latitud, longitud);
+							Ambulancia a = s.buscarA(Integer.parseInt(textField.getText()));
+							String t;
+							if(a.getDisp()){t= a.getEquipo()+" "+a.getLatitud()+" "+a.getLongitud()+" "+a.getNumRegistro()+" Disponible";}
+							else {t= a.getEquipo()+" "+a.getLatitud()+" "+a.getLongitud()+" "+a.getNumRegistro()+" Ocupada";}
+							textField_3.setText(t);
 						} catch (LogicaExcepcion e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -110,7 +133,9 @@ public class CambiarCoor extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						EmergenciasApp e= new EmergenciasApp();
 						dispose();
+						e.frame.show();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

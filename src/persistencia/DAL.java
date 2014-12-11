@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.util.List;
+import logica.Especialidad;
 
 import logica.Ambulancia;
 import logica.Paciente;
@@ -91,10 +92,11 @@ public class DAL {
 	{
 		try{
 	ambulanciaDAO = new AmbulanciaDAOImp();
+	
 	return ambulanciaDAO.buscarAmbulancia(numero);
 	}catch(DAOExcepcion e)
 	{
-		throw new LogicaExcepcion("No se pudo encontrar la ambulancia.");
+		throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
 	}
 	}
 	
@@ -107,6 +109,29 @@ public class DAL {
 		}catch(DAOExcepcion e)
 		{
 			throw new DAOExcepcion("No se pudo crear la Ambulancia.");
+		}
+	}
+	public void setDisp(int num, boolean disp) throws DAOExcepcion 
+	{
+		try
+		{
+		ambulanciaDAO = new AmbulanciaDAOImp();
+		ambulanciaDAO.setDisp(num, disp);
+		}catch(DAOExcepcion e)
+		{
+			throw new DAOExcepcion("No se pudo modificar disp.");
+		}
+	}
+
+	public List<Especialidad> listarEspecialidad(String nombre) throws LogicaExcepcion
+	{
+		try
+		{
+			return(new HospitalDAOImp()).listaEspecialidad(nombre);
+		}
+		catch (DAOExcepcion e)
+		{
+			throw new LogicaExcepcion("No se pudo listar los pacientes.");
 		}
 	}
 }

@@ -7,8 +7,16 @@ private int numRegistro;
 private String equipo;
 private double latitud;
 private double longitud;
+private boolean disp;
 
 
+public Ambulancia(int numRegistro, String equipo, double latitud, double longitud, boolean disp){
+	this.numRegistro=numRegistro;
+	this.equipo=equipo;
+	this.latitud=latitud;
+	this.longitud=longitud;
+	this.disp=disp;
+}
 public Ambulancia(int numRegistro, String equipo, double latitud, double longitud){
 	this.numRegistro=numRegistro;
 	this.equipo=equipo;
@@ -23,6 +31,12 @@ public void setEquipo(String equipo) {
 }
 public int getNumRegistro() {
 	return numRegistro;
+}
+public boolean getDisp(){
+	return disp;
+}
+public void setDisp(int numero, boolean disp){
+	this.disp=disp;
 }
 public void setNumRegistro(int numRegistro) {
 	this.numRegistro = numRegistro;

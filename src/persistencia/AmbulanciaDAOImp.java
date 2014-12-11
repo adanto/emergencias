@@ -20,12 +20,14 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	public Ambulancia buscarAmbulancia(int numero)throws DAOExcepcion
 	{
 	try{
+		System.out.println(numero);
 		connManager.connect();
-		ResultSet rs=connManager.queryDB("select * from AMBULANCIA where numero= '"+numero+"'");
+		ResultSet rs=connManager.queryDB("select * from AMBULANCIA where numregistro= "+numero+"");
 		connManager.close();
 	
 		if (rs.next()){
-			return new Ambulancia(rs.getInt("NUMREGISTRO"),rs.getString("EQUIPO"),rs.getFloat("LATITUD"), rs.getFloat("LONGITUD"));
+			Ambulancia a = new Ambulancia(rs.getInt("NUMREGISTRO"),rs.getString("EQUIPO"),rs.getFloat("LATITUD"),rs.getFloat("LONGITUD"),rs.getBoolean("DISPONIBILIDAD"));
+			return a;
 		}
 		 
 	}
@@ -43,8 +45,18 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 		catch (Exception e){	throw new DAOExcepcion(e);	}
 	}
 	
-	public void cambiarCoor(int numero, float latitud, float longitud) throws DAOExcepcion
-		{
+	public void setDisp(int numero, boolean disp) throws DAOExcepcion{
+		try{
+			connManager.connect();
+			connManager.updateDB("update into AMBULANCIA A (DISPONIBILIDAD) values ('"+disp+"') WHERE A.numregistro = '"+numero+"'");
+			connManager.close();
+		}
+		catch (Exception e){	throw new DAOExcepcion(e);	}
+		}
+	
+	
+	public void cambiarCoor(int numero, float latitud, float longitud) throws DAOExcepcion{
+		
 		try{
 			connManager.connect();
 			connManager.updateDB("update into AMBULANCIA A (LATITUD, LONGITUD) values ('"+latitud+"','"+longitud+"') WHERE A.numregistro = '"+numero+"'");
@@ -54,3 +66,4 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 		}
 
 	}
+
