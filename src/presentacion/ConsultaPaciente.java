@@ -73,8 +73,16 @@ public class ConsultaPaciente extends JDialog {
 				try {
 					ServicioEmergencia s= new ServicioEmergencia();
 					Paciente p=s.buscarP(textField.getText());
+					if(p==null){
+						System.out.println("penenautilus");
+						AltaPacienteJDialog a=new AltaPacienteJDialog();
+						a.show();
+						dispose();
+					}
+					else{
 					textField_1.setText(p.getDni()+"  "+p.getNombre()+"  "+p.getApellidos()+"  "+p.getDireccion()+"  "+p.getEdad()+"  "+p.getTelefono()+"  "+p.getSexo());
-				} catch (LogicaExcepcion e) {
+					}
+					} catch (LogicaExcepcion e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -88,6 +96,8 @@ public class ConsultaPaciente extends JDialog {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				EmergenciasApp h=new EmergenciasApp();
+				h.frame.show();
 				dispose();
 			}
 		});
@@ -101,4 +111,17 @@ public class ConsultaPaciente extends JDialog {
 		contentPanel.add(textField_1);
 		textField_1.setColumns(10);
 	}
+	public void mostrar(String DNI) throws InterruptedException{
+		ServicioEmergencia s;
+		try {
+			s = new ServicioEmergencia();
+			Paciente p=s.buscarP(DNI);
+			textField_1.setText(p.getDni()+"  "+p.getNombre()+"  "+p.getApellidos()+"  "+p.getDireccion()+"  "+p.getEdad()+"  "+p.getTelefono()+"  "+p.getSexo());
+			
+		} catch (LogicaExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
 }

@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
+import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
 
 import java.awt.event.MouseAdapter;
@@ -96,6 +97,12 @@ public class CambiaDisp extends JDialog {
 				} catch (LogicaExcepcion e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (DAOExcepcion e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});

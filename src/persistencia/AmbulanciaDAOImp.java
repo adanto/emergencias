@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import logica.Ambulancia;
 import excepciones.DAOExcepcion;
 
@@ -20,7 +21,6 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	public Ambulancia buscarAmbulancia(int numero)throws DAOExcepcion
 	{
 	try{
-		System.out.println(numero);
 		connManager.connect();
 		ResultSet rs=connManager.queryDB("select * from AMBULANCIA where numregistro= "+numero+"");
 		connManager.close();
@@ -39,7 +39,7 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	{
 		try{
 			connManager.connect();
-			connManager.updateDB("insert into AMBULANCIA (numregistro,equipo,latitud,longitud) values ('"+a.getNumRegistro()+"','"+a.getEquipo()+"','"+a.getLatitud()+"', '"+a.getLongitud()+"')");
+			connManager.updateDB("insert into AMBULANCIA (numregistro,equipo,latitud,longitud,disponibilidad) values ('"+a.getNumRegistro()+"','"+a.getEquipo()+"','"+a.getLatitud()+"', '"+a.getLongitud()+"', '"+a.getDisp()+"')");
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);	}
@@ -47,11 +47,18 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	
 	public void setDisp(int numero, boolean disp) throws DAOExcepcion{
 		try{
+
+			System.out.println("1");
 			connManager.connect();
-			connManager.updateDB("update into AMBULANCIA A (DISPONIBILIDAD) values ('"+disp+"') WHERE A.numregistro = '"+numero+"'");
+
+			System.out.println("2");
+			connManager.updateDB("update AMBULANCIA set disponibilidad ='"+disp+"' where numregistro='"+numero+"'");
+			
+			System.out.println("3");
 			connManager.close();
 		}
-		catch (Exception e){	throw new DAOExcepcion(e);	}
+		catch (Exception e){	throw new DAOExcepcion(e);
+		}
 		}
 	
 	

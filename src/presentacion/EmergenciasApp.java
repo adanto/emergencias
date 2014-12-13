@@ -128,6 +128,12 @@ public class EmergenciasApp {
 				
 			}
 		});
+		
+		JMenuItem mntmListarEmergencias = new JMenuItem("Listar Llamadas Emergencias");
+		mnNewMenu.add(mntmListarEmergencias);
+		
+		JSeparator separator_3 = new JSeparator();
+		mnNewMenu.add(separator_3);
 		mnNewMenu.add(mntmListarPacientes);
 		
 		JSeparator separator_2 = new JSeparator();
@@ -148,6 +154,19 @@ public class EmergenciasApp {
 			}
 		});
 		mnNewMenu.add(mntmListarEspecialidadesDe);
+		
+		JMenu mnOperadoremergencia = new JMenu("OperadorEmergencia");
+		menuBar.add(mnOperadoremergencia);
+		
+		JMenuItem mntmNuevaEmergencia = new JMenuItem("Nueva Emergencia");
+		mntmNuevaEmergencia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConsultaPaciente n= new ConsultaPaciente();
+				frame.dispose();
+				n.show();
+			}
+		});
+		mnOperadoremergencia.add(mntmNuevaEmergencia);
 		
 		JMenu mnSalir = new JMenu("Salir");
 							

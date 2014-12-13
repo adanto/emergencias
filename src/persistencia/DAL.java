@@ -1,8 +1,8 @@
 package persistencia;
 
 import java.util.List;
-import logica.Especialidad;
 
+import logica.Especialidad;
 import logica.Ambulancia;
 import logica.Paciente;
 import excepciones.DAOExcepcion;
@@ -92,7 +92,7 @@ public class DAL {
 	{
 		try{
 	ambulanciaDAO = new AmbulanciaDAOImp();
-	
+
 	return ambulanciaDAO.buscarAmbulancia(numero);
 	}catch(DAOExcepcion e)
 	{
@@ -113,10 +113,12 @@ public class DAL {
 	}
 	public void setDisp(int num, boolean disp) throws DAOExcepcion 
 	{
+
 		try
 		{
 		ambulanciaDAO = new AmbulanciaDAOImp();
 		ambulanciaDAO.setDisp(num, disp);
+
 		}catch(DAOExcepcion e)
 		{
 			throw new DAOExcepcion("No se pudo modificar disp.");

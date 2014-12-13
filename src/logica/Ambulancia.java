@@ -35,7 +35,7 @@ public int getNumRegistro() {
 public boolean getDisp(){
 	return disp;
 }
-public void setDisp(int numero, boolean disp){
+public void setDisp(boolean disp){
 	this.disp=disp;
 }
 public void setNumRegistro(int numRegistro) {

@@ -139,7 +139,6 @@ public class AltaPacienteJDialog extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						System.out.println("Estamos aquí");
 						char H; 
 						if(rdbtnHombre.isSelected()){H='H';}
 						else{H='M';}
@@ -154,6 +153,17 @@ public class AltaPacienteJDialog extends JDialog {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} 
+						ConsultaPaciente c=new ConsultaPaciente();
+						dispose();
+						c.show();
+						try {
+							c.mostrar(textField.getText());
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
 					}
 				});
 				okButton.setActionCommand("OK");

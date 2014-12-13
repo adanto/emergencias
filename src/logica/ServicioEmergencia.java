@@ -30,26 +30,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 	{
 		hospitales.add(b);
 	}
-	public void anyadir(Paciente p) throws LogicaExcepcion
-	{
-		if(!this.pacientes.containsKey(p.getDni()))
-		try
-		{
-			DAL.getSingleton().crearPaciente(p);
-			pacientes.put(p.getDni(),p);
-		}catch(DAOExcepcion e)
-		{
-			e.printStackTrace();
-		}
-	}
-	public void listaAmbulancias(){
-		for(int i = 0; i<ambulancias.size(); i++){
-			Ambulancia A = ambulancias.get(i);
-			if(A!=null){
-				System.out.println("Numero = "+A.getEquipo()+" y numRegistro "+A.getNumRegistro());
-			}
-		}
-	}
 	
 	public void borrar(Paciente p) throws LogicaExcepcion
 	{
@@ -64,9 +44,30 @@ public ServicioEmergencia() throws LogicaExcepcion
 			}
 		}
 	}
-	public void anyadir(Ambulancia r)
+	public void anyadir(Paciente p) throws LogicaExcepcion
 	{
-		ambulancias.add(r);
+		if(!this.pacientes.containsKey(p.getDni()))
+		try
+		{
+			DAL.getSingleton().crearPaciente(p);
+			pacientes.put(p.getDni(),p);
+		}catch(DAOExcepcion e)
+		{
+			e.printStackTrace();
+		}
+	}
+	public void anyadir(Ambulancia r) throws LogicaExcepcion
+	{
+		if(buscarA(r.getNumRegistro())==null){
+			try{
+				DAL.getSingleton().crearAmbulancia(r);
+				ambulancias.add(r);
+			}
+			catch(DAOExcepcion e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 	public void anyadir(RegistroEmergencia q)
 	{
@@ -99,24 +100,47 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return salida;		
 	}
 	
-	public Ambulancia buscarA(int A) throws LogicaExcepcion
-	{
-		Ambulancia amb = null;
-		if(!ambulancias.contains(A))
-		{
-			System.out.println(ambulancias.contains(A));
-			try{
-				amb = DAL.getSingleton().buscarAmbulancia(A.getNumRegistro());
-				if(amb == null)
-				{
-					this.ambulancias.add(A);
-				}
-			}catch(LogicaExcepcion e)
-			{
-				e.printStackTrace();
+	public void listaAmbulancias(){
+		for(int i = 0; i<ambulancias.size(); i++){
+			Ambulancia A = ambulancias.get(i);
+			if(A!=null){
+				System.out.println("Numero = "+A.getEquipo()+" y numRegistro "+A.getNumRegistro());
 			}
 		}
-		return amb;
+	}
+	public void listAmbulancias() throws LogicaExcepcion{
+
+		Ambulancia pasando = null;
+		Iterator<Ambulancia> iteratorcito = ambulancias.listIterator();
+		while(iteratorcito.hasNext()){
+			pasando=iteratorcito.next();
+			System.out.println("Numero: "+pasando.getNumRegistro()+" Disponibilidad: "+pasando.getDisp()+" Lat: "+pasando.getLatitud()+" Long: "+pasando.getLongitud());
+		}
+	}
+	
+	public Ambulancia buscarA(int A) throws LogicaExcepcion
+	{
+		boolean encontrado = false;
+		Ambulancia encont = null;
+		Ambulancia pasando = null;
+		Iterator<Ambulancia> iteratorcito = ambulancias.listIterator();
+		while(iteratorcito.hasNext() && !encontrado){
+			pasando = iteratorcito.next();
+			if(pasando.getNumRegistro()==A){
+				encontrado = true;
+				encont = pasando;
+			}
+		}
+		if(!encontrado){
+				try{
+					encont = DAL.getSingleton().buscarAmbulancia(A);
+				}catch(LogicaExcepcion e)
+				{
+					e.printStackTrace();
+				}
+			}
+	
+		return encont;
 	}
 	
 	public void cambiarCoor(int numero, float latitud, float longitud)
@@ -136,24 +160,37 @@ public ServicioEmergencia() throws LogicaExcepcion
 			}
 		}
 	}
-	public void setDisp(int numero, boolean disp) throws LogicaExcepcion
+	public void setDisp(int numero, boolean disp) throws LogicaExcepcion, DAOExcepcion
 	{
-		//Ambulancia a = this.buscarA(numero);
-		Ambulancia a = this.ambulancias.get(numero);
-		if(a == null)
-		{
+		Ambulancia a = this.buscarA(numero);
+		Ambulancia db = null;
+		//Ambulancia a = this.ambulancias.(numero);
+
 			try{
-				a = DAL.getSingleton().buscarAmbulancia(numero);
-				if(a != null)
+				db = DAL.getSingleton().buscarAmbulancia(numero);
+				if(db != null)
 				{
-					a.setDisp(numero, disp);
+					try{
+
+						DAL.getSingleton().setDisp(db.getNumRegistro(), disp);
+					}catch(DAOExcepcion e){
+						e.printStackTrace();
+					}
 				}
 			}catch(LogicaExcepcion e)
 			{
 				e.printStackTrace();
 			}
+		
+		if(a!= null){
+			a.setDisp(disp);
+		}else{
+			if(db!=null){
+				anyadir(db);
+			}
 		}
 	}
+	
 	public void numeroAmbulancias(){
 		System.out.print(this.ambulancias.size());
 	}

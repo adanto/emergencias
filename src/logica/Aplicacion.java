@@ -8,7 +8,7 @@ import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
 
 public class Aplicacion {
-	public static void main(String[] args) throws LogicaExcepcion{
+	public static void main(String[] args) throws LogicaExcepcion, DAOExcepcion{
 		//Se crea el Servicio de Emergencias
 		ServicioEmergencia emergencias = new ServicioEmergencia();
 
@@ -27,7 +27,9 @@ public class Aplicacion {
 			System.out.println("4 - Elimina el de la primera opción");
 			System.out.println("5 - Mostrar todos listados");
 			System.out.println("6 - Buscar ambulancia. Si no está la añade");
-			System.out.println("7 - Número de ambulancias\n");
+			System.out.println("7 - Número de ambulancias");
+			System.out.println("8 - Lista ambulancias");
+			System.out.println("9 - Cambia disponibilidad de la ambulancia 3\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -110,8 +112,12 @@ public class Aplicacion {
 				}
 				break;
 			case 6:
-				//emergencias.buscarA(new Ambulancia(1, "Equipo1", 12.3, 31.2, true));
-				emergencias.buscarA(new Ambulancia(3, "Equipo1", 12.3, 31.2, true));
+				if(emergencias.buscarA(3)==null){
+					System.out.println("Añadiendo");
+					emergencias.anyadir(new Ambulancia(3, "Equipo1", 12.3, 31.2, true));
+				}else{
+					System.out.println("El bicho ya está añadido");
+				}
 				
 				break;
 			case 7:
@@ -119,6 +125,10 @@ public class Aplicacion {
 				break;
 			case 8:
 				emergencias.listaAmbulancias();
+				break;
+			case 9:
+				emergencias.setDisp(5, true);
+				break;
 			}
 		}
 	}
