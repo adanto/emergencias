@@ -4,6 +4,7 @@ import java.util.List;
 
 import logica.Especialidad;
 import logica.Ambulancia;
+import logica.Hospital;
 import logica.Paciente;
 import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
@@ -13,6 +14,7 @@ public class DAL {
 	// Declaración de los DAO
 	IPacienteDAO pacienteDAO;
 	IAmbulanciaDAO ambulanciaDAO;
+	IHospital hospitalDAO;
 	// constructor privado
 	private DAL() throws DAOExcepcion {
 		this.pacienteDAO = new PacienteDAOImp();
@@ -124,7 +126,14 @@ public class DAL {
 			throw new DAOExcepcion("No se pudo modificar disp.");
 		}
 	}
-
+	public List<Hospital> listarHospitales() throws LogicaExcepcion{
+		try{
+			return(new HospitalDAOImp().listaHospitales());
+		}catch(DAOExcepcion e){
+			throw new LogicaExcepcion("No se puedo listar hospitales");
+		}
+	}
+	
 	public List<Especialidad> listarEspecialidad(String nombre) throws LogicaExcepcion
 	{
 		try

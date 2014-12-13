@@ -1,13 +1,13 @@
 package logica;
-import java.io.*;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
 
 public class Aplicacion {
+	private static Scanner keyboard;
+
 	public static void main(String[] args) throws LogicaExcepcion, DAOExcepcion{
 		//Se crea el Servicio de Emergencias
 		ServicioEmergencia emergencias = new ServicioEmergencia();
@@ -16,9 +16,8 @@ public class Aplicacion {
 		// AQUÍ INCLUIR CADA UNA DE LAS EJECUCIONES
 		//--------------------------------------------------------------------
 		
-		Iterator<Paciente> listaPac = emergencias.getPatients();
 		int sel = 1;
-		Scanner keyboard = new Scanner(System.in);
+		keyboard = new Scanner(System.in);
 		while(sel!=0){
 			System.out.println("\nSeleccione su opción\n");
 			System.out.println("1 - Buscar paciente, si no está lo crea y luego lo busca");
@@ -30,8 +29,10 @@ public class Aplicacion {
 			System.out.println("7 - Número de ambulancias");
 			System.out.println("8 - Lista ambulancias");
 			System.out.println("9 - Cambia disponibilidad de la ambulancia 3");
-			System.out.println("10- Cambia direccion de la amb 3");
-			System.out.println("11- Lista todas las especialidades del hospital de nombre Hospital1\n");
+			System.out.println("10- Cambia direccion de la ambulancia 3");
+			System.out.println("11- Lista todas las especialidades del hospital de nombre Hospital1");
+			System.out.println("12- Numero de hospitales totales en la DB");
+			System.out.println("13- Información de todos los hospitales de la DB\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -135,8 +136,14 @@ public class Aplicacion {
 				emergencias.cambiarCoor(3, 10, 11);
 				break;
 			case 11:
-				List<Especialidad> especialidades = emergencias.listarEspecialidad("Hospital1");
+				emergencias.listarEspecialidad("Hospital1");
 				emergencias.especialidadesLocal();
+				break;
+			case 12:
+				System.out.println(emergencias.getHospitales().size());
+				break;
+			case 13:
+				emergencias.nombHospitales();
 				break;
 			}
 		}

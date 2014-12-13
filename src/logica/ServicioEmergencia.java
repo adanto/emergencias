@@ -207,6 +207,27 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return p;
 }
 	
+	public List<Hospital> getHospitales() throws LogicaExcepcion{
+		List<Hospital>dbHospital =null;
+		try
+		{
+			dbHospital = dal.listarHospitales();
+		}
+		catch(LogicaExcepcion e)
+		{
+		  e.printStackTrace(); 
+		  throw new LogicaExcepcion("La lista de hospitales no puede ser recuperada");
+		}
+		return dbHospital;
+	}
+	
+	public void nombHospitales() throws LogicaExcepcion{
+		List<Hospital> hospitales = getHospitales();
+		for(Hospital h : hospitales){
+			System.out.println(h.getNombre()+" "+h.getDireccion()+" "+h.getLatitud()+" "+h.getLongitud());
+		}
+	}
+	
 	public Iterator<Paciente> getPatients() throws LogicaExcepcion
 	{
 		try
