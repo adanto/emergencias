@@ -255,4 +255,13 @@ public ServicioEmergencia() throws LogicaExcepcion
 		}
 		return this.especialidad;
 	}
+	public void especialidadesLocal(){
+
+		for(int i = 0; i<especialidad.size(); i++){
+			Especialidad A = especialidad.get(i);
+			if(A!=null){
+				System.out.println(A.getNombre());
+			}
+		}
+	}
 }

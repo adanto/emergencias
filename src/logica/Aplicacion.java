@@ -30,7 +30,8 @@ public class Aplicacion {
 			System.out.println("7 - Número de ambulancias");
 			System.out.println("8 - Lista ambulancias");
 			System.out.println("9 - Cambia disponibilidad de la ambulancia 3");
-			System.out.println("10- Cambia direccion de la amb 3\n");
+			System.out.println("10- Cambia direccion de la amb 3");
+			System.out.println("11- Lista todas las especialidades del hospital de nombre Hospital1\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -132,6 +133,10 @@ public class Aplicacion {
 				break;
 			case 10:
 				emergencias.cambiarCoor(3, 10, 11);
+				break;
+			case 11:
+				List<Especialidad> especialidades = emergencias.listarEspecialidad("Hospital1");
+				emergencias.especialidadesLocal();
 				break;
 			}
 		}
