@@ -48,13 +48,10 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 	public void setDisp(int numero, boolean disp) throws DAOExcepcion{
 		try{
 
-			System.out.println("1");
 			connManager.connect();
 
-			System.out.println("2");
 			connManager.updateDB("update AMBULANCIA set disponibilidad ='"+disp+"' where numregistro='"+numero+"'");
 			
-			System.out.println("3");
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);
@@ -66,7 +63,8 @@ public class AmbulanciaDAOImp implements IAmbulanciaDAO{
 		
 		try{
 			connManager.connect();
-			connManager.updateDB("update into AMBULANCIA A (LATITUD, LONGITUD) values ('"+latitud+"','"+longitud+"') WHERE A.numregistro = '"+numero+"'");
+			connManager.updateDB("update AMBULANCIA set LATITUD ='"+latitud+"', LONGITUD='"+longitud+"' WHERE numregistro = '"+numero+"'");
+
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);	}

@@ -143,31 +143,29 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return encont;
 	}
 	
-	public void cambiarCoor(int numero, float latitud, float longitud)
+	public void cambiarCoor(int numero, float latitud, float longitud) throws LogicaExcepcion, DAOExcepcion
 	{
-		Ambulancia a = this.ambulancias.get(numero);
-		if(a == null)
-		{
+		Ambulancia db = null;
 			try{
-				a = DAL.getSingleton().buscarAmbulancia(numero);
-				if(a != null)
+				db = DAL.getSingleton().buscarAmbulancia(numero);
+				if(db != null)
 				{
-					a.cambiarCoordenadas(numero, latitud, longitud);
+					DAL.getSingleton().cambiarCoor(numero, latitud, longitud);
 				}
 			}catch(LogicaExcepcion e)
 			{
 				e.printStackTrace();
 			}
-		}
+		
 	}
 	public void setDisp(int numero, boolean disp) throws LogicaExcepcion, DAOExcepcion
 	{
-		Ambulancia a = this.buscarA(numero);
 		Ambulancia db = null;
 		//Ambulancia a = this.ambulancias.(numero);
 
 			try{
 				db = DAL.getSingleton().buscarAmbulancia(numero);
+
 				if(db != null)
 				{
 					try{
@@ -182,13 +180,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 				e.printStackTrace();
 			}
 		
-		if(a!= null){
-			a.setDisp(disp);
-		}else{
-			if(db!=null){
-				anyadir(db);
-			}
-		}
 	}
 	
 	public void numeroAmbulancias(){

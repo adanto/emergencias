@@ -29,7 +29,8 @@ public class Aplicacion {
 			System.out.println("6 - Buscar ambulancia. Si no está la añade");
 			System.out.println("7 - Número de ambulancias");
 			System.out.println("8 - Lista ambulancias");
-			System.out.println("9 - Cambia disponibilidad de la ambulancia 3\n");
+			System.out.println("9 - Cambia disponibilidad de la ambulancia 3");
+			System.out.println("10- Cambia direccion de la amb 3\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -127,7 +128,10 @@ public class Aplicacion {
 				emergencias.listaAmbulancias();
 				break;
 			case 9:
-				emergencias.setDisp(5, true);
+				emergencias.setDisp(3, true);
+				break;
+			case 10:
+				emergencias.cambiarCoor(3, 10, 11);
 				break;
 			}
 		}

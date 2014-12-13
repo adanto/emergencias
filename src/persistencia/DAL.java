@@ -108,7 +108,7 @@ public class DAL {
 		ambulanciaDAO.cambiarCoor(num, latitud, longitud);
 		}catch(DAOExcepcion e)
 		{
-			throw new DAOExcepcion("No se pudo crear la Ambulancia.");
+			throw new DAOExcepcion("No se pudo cambiar las coordenadas a la Ambulancia.");
 		}
 	}
 	public void setDisp(int num, boolean disp) throws DAOExcepcion 

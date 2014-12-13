@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
 
 import java.awt.event.ActionListener;
@@ -120,6 +121,9 @@ public class CambiarCoor extends JDialog {
 							else {t= a.getEquipo()+" "+a.getLatitud()+" "+a.getLongitud()+" "+a.getNumRegistro()+" Ocupada";}
 							textField_3.setText(t);
 						} catch (LogicaExcepcion e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (DAOExcepcion e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
