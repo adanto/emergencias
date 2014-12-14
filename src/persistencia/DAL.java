@@ -44,6 +44,17 @@ public class DAL {
 		throw new LogicaExcepcion("No se pudo crear el paciente.");
 	}
 	}
+	
+	public int ambMinima(double lon, double lat) throws DAOExcepcion{
+		int amb = -1;
+		try{
+			emergenciaDAO = new EmergenciasDAOImp();
+			amb = emergenciaDAO.ambMinima(lon, lat);
+		}catch(DAOExcepcion e){
+			throw new DAOExcepcion("No se pudo encontrar la ambulancia mínima.");
+		}
+		return amb;
+	}
 	public void crearPaciente(Paciente p) throws DAOExcepcion 
 	{
 		try

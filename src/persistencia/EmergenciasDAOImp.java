@@ -17,7 +17,25 @@ public class EmergenciasDAOImp implements IEmergenciaDAO{
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}
-	
+	public int ambMinima(double lon, double lat) throws DAOExcepcion{
+		try{
+			connManager.connect();
+			String query = "SELECT A.numRegistro, ((A.latitud-'"+lon+"')*(A.latitud-'"+lon+"')+(A.longitud-'"+lat+"')*(A.longitud-'"+lat+"')+(H.latitud-'"+lon+"')*(H.latitud-'"+lon+"')+(H.longitud-'"+lat+"')*(H.longitud-'"+lat+"')) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE ORDER BY Distancia";
+			ResultSet rs=connManager.queryDB(query);
+			connManager.close();
+			if (rs.next()){
+				int val = rs.getInt("numRegistro");
+				double dist = rs.getDouble("Distancia");
+				System.out.println(dist);
+				return val;
+			}
+		}catch (Exception e){	
+			System.out.println("Estamos en el fondo");
+			throw new DAOExcepcion(e);}
+		
+		return -1;
+		
+	}
 	
 	public void crearEmergencia(Emergencia em) throws DAOExcepcion {	
 		try{

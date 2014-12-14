@@ -33,7 +33,8 @@ public class Aplicacion {
 			System.out.println("11- Lista todas las especialidades del hospital de nombre Hospital1");
 			System.out.println("12- Numero de hospitales totales en la DB");
 			System.out.println("13- Información de todos los hospitales de la DB");
-			System.out.println("14- Get Emergencia a lo pro\n");
+			System.out.println("14- Get Emergencia a lo pro");
+			System.out.println("15- Obtener el numero de ambulancia más cercano a una posición\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -151,6 +152,11 @@ public class Aplicacion {
 				System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
 				System.out.println(em.getHosp());
 				break;
+			case 15:
+				System.out.println("Ambulancia más cercana a (10, 10) es la numRegistro: "+emergencias.ambMinima(10,10));
+				System.out.println("Ambulancia más cercana a (-10, 10) es la numRegistro: "+emergencias.ambMinima(-10,10));
+				System.out.println("Ambulancia más cercana a (10, -10) es la numRegistro: "+emergencias.ambMinima(10,-10));
+				System.out.println("Ambulancia más cercana a (-10, -10) es la numRegistro: "+emergencias.ambMinima(-10,-10));
 			}
 		}
 	}

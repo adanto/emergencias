@@ -28,6 +28,8 @@ public class Emergencia {
 		this.ambulancia = null;
 		this.paciente = null;
 	}
+	
+	
 	public int getCodEmergencia(){
 		return this.codEmergencia;
 	}
@@ -49,14 +51,12 @@ public class Emergencia {
 	public Ambulancia getAmb(){
 		return this.ambulancia;
 	}
-	
 	public void setHosp(Hospital h){
 		this.hospital = h;
 	}
 	public Hospital getHosp(){
 		return this.hospital;
 	}
-	
 	public double getLong(){
 		return this.longitud;
 	}	

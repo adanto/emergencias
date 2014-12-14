@@ -26,9 +26,24 @@ public ServicioEmergencia() throws LogicaExcepcion{
 	this.dal = DAL.getSingleton();
 }
 
+	public int ambMinima(double d, double f) throws LogicaExcepcion{
+		int amb = -1;
+		try{
+			amb = DAL.getSingleton().ambMinima(d, f);
+		}catch(DAOExcepcion e){
+			e.printStackTrace();
+		};
+		return amb;
+	}
+
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
+		//setBest(em);
 		if(buscarEM(em.getCodEmergencia())==null)
 			try{
+				Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
+				if(amb!=null){
+					em.setAmb(amb);
+				}
 				DAL.getSingleton().crearEmergencia(em);
 				emergencias.add(em);
 			}
