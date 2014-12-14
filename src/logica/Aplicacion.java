@@ -17,9 +17,11 @@ public class Aplicacion {
 		//--------------------------------------------------------------------
 		
 		int sel = 1;
+		int lon = 1, lat = 2;
 		keyboard = new Scanner(System.in);
 		while(sel!=0){
 			System.out.println("\nSeleccione su opción\n");
+			System.out.println("0 - SALIR");
 			System.out.println("1 - Buscar paciente, si no está lo crea y luego lo busca");
 			System.out.println("2 - Busca paciente, si está lo muestra, añade un paciente y los imprime todos");
 			System.out.println("3 - Añade paciente y los lista todos");
@@ -150,8 +152,10 @@ public class Aplicacion {
 				break;
 			case 14:
 				Emergencia em = emergencias.buscarEM(1);
-				System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
-				System.out.println(em.getHosp());
+				if(em!=null){
+					System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
+					System.out.println(em.getHosp());
+				}
 				break;
 			case 15:
 				System.out.println("Ambulancia más cercana a (10, 10) es la numRegistro: "+emergencias.ambMinima(10,10));
@@ -160,13 +164,12 @@ public class Aplicacion {
 				System.out.println("Ambulancia más cercana a (-10, -10) es la numRegistro: "+emergencias.ambMinima(-10,-10));
 				break;
 			case 16:
-				int lon = 1, lat = 2;
 				String query1 = "SELECT A.numRegistro, ((A.latitud-'"+lon+"')*(A.latitud-'"+lon+"')+(A.longitud-'"+lat+"')*(A.longitud-'"+lat+"')+(H.latitud-'"+lon+"')*(H.latitud-'"+lon+"')+(H.longitud-'"+lat+"')*(H.longitud-'"+lat+"')) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE ORDER BY Distancia";
 				String query2 = "SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))=(SELECT MIN((H1.longitud-'"+lon+"')*(H1.longitud-'"+lon+"')+(H1.latitud-'"+lat+"')*(H1.latitud-'"+lat+"')) FROM Hospital H1) AND ((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"'))=(SELECT MIN((A1.longitud-'"+lon+"')*(A1.longitud-'"+lon+"')+(A1.latitud-'"+lat+"')*(A1.latitud-'"+lat+"')) FROM Ambulancia A1 WHERE A1.tipo = 'P' AND A1.disponibilidad = TRUE)";
 				System.out.println(query1);
 				System.out.println(query2);
-				}
-			break;
+				break;
+			}
 		}
 	}
 }
