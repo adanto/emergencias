@@ -1,6 +1,5 @@
 package logica;
 
-import java.util.ArrayList;
 
 public class Sintoma {
 	
@@ -8,7 +7,6 @@ public class Sintoma {
 	private int duracion=0;
 	private String descripcion="";
 	private String nombre="";
-	ArrayList<RegistroEmergencia> registros= new ArrayList<RegistroEmergencia>();
 	
 	public Sintoma(String nombre, String desc, int duracion, String est){
 		this.nombre=nombre;
@@ -23,17 +21,6 @@ public class Sintoma {
 	public String getDescripcion() {return descripcion;}
 	public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
-	public ArrayList<RegistroEmergencia> registroSintoma(){
-		return registros;
-		}
-	
-	public void añadeRegistro(RegistroEmergencia nuevo){
-		registros.add(nuevo);
-	}
-	
-	public void borraRegistro(int i){
-		registros.remove(i);
-	}
 	public String getNombre() {
 		return nombre;
 	}

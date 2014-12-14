@@ -13,7 +13,6 @@ public class ServicioEmergencia {
 
 	private ArrayList <Hospital> hospitales;
 	private ArrayList <Ambulancia> ambulancias;
-	private ArrayList <RegistroEmergencia> registros;
 	private HashMap <String,Paciente> pacientes;
 	private ArrayList <Especialidad> especialidad;
 	private ArrayList <Emergencia> emergencias;
@@ -75,10 +74,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 			}
 		}
 	}
-	public void anyadir(RegistroEmergencia q)
-	{
-		registros.add(q);
-	}
 
 	public void borrar(Hospital b)
 	{
@@ -89,11 +84,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 		ambulancias.remove(r);
 	}
 	
-	
-	public void borrar(RegistroEmergencia h)
-	{
-		registros.remove(h);
-	}
 	
 
 	public Hospital buscarH(String nombre)
@@ -235,17 +225,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 		return this.pacientes.values().iterator();
 	}
 	
-	
-	public RegistroEmergencia buscar(float latitud, float longitud)
-	{
-		RegistroEmergencia salida = null;
-		for(RegistroEmergencia elemento: registros)
-		{
-			if(elemento.getLatitud()==latitud && elemento.getLongitud()==longitud) 
-			{ salida = elemento; }
-		}
-		return salida;
-	}
 	public List<Especialidad> listarEspecialidad(String nombre){
 		
 		try
