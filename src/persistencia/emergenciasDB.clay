@@ -1,7 +1,188 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <clay-model clay-version="2.0.1">
 <database-model author="" begin-script="" end-script="" id="75c73ce6:14a46347b9d:-7fee" name="emergenciasDB" sql-dialect-id="jp.azzurri.clay.dialect.HSQLDB_1_7_0_Dialect" version="1.0">
-<schema-list/>
+<schema-list>
+<schema id="73e9ba4b:14a46685045:-7ffe" name="DEFAULT_SCHEMA">
+<table-list>
+<table id="73e9ba4b:14a46685045:-8000" name="AMBULANCIA">
+<column-list>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff9" mandatory="true" name="numRegistro">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff8" mandatory="false" name="equipo">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff7" mandatory="false" name="latitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff6" mandatory="false" name="longitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="1" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff5" mandatory="false" name="tipo">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff4" mandatory="false" name="compañia">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ff3" mandatory="false" name="disponibilidad">
+<data-type name="BIT" selected-variant-pattern="BIT"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f78" mandatory="false" name="nombreH">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7fff" name="PK_AMBULANCIA">
+<primary-key-column name="numRegistro"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="73e9ba4b:14a46685045:-7f7a" name="FK_AMBULANCIA_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_HOSPITAL" referenced-table="HOSPITAL" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="0..1" target-relationship-type="">
+<foreign-key-column column-name="nombreH" referenced-key-column-name="nombreH"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="73e9ba4b:14a46685045:-7f9d" name="HOSPITAL">
+<column-list>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f93" mandatory="true" name="nombreH">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f92" mandatory="false" name="direccion">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f91" mandatory="false" name="latitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f90" mandatory="false" name="longitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7f9c" name="PK_HOSPITAL">
+<primary-key-column name="nombreH"/>
+</primary-key>
+</table>
+<table id="73e9ba4b:14a46685045:-7f56" name="ESPECIALIDAD">
+<column-list>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f52" mandatory="true" name="codEsp">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7f1a" mandatory="true" name="nombreH">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7f55" name="PK_ESPECIALIDAD">
+<primary-key-column name="codEsp"/>
+<primary-key-column name="nombreH"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="73e9ba4b:14a46685045:-7f1c" name="FK_ESPECIALIDAD_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_HOSPITAL" referenced-table="HOSPITAL" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="0..*" target-relationship-type="">
+<foreign-key-column column-name="nombreH" referenced-key-column-name="nombreH"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="73e9ba4b:14a46685045:-7efd" name="SINTOMA">
+<column-list>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ef9" mandatory="true" name="codSintoma">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ef8" mandatory="false" name="estado">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ef7" mandatory="false" name="descripcion">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ef6" mandatory="false" name="duracion">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ecc" mandatory="false" name="codEsp">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7efc" name="PK_SINTOMA">
+<primary-key-column name="codSintoma"/>
+</primary-key>
+<foreign-key-list>
+<foreign-key id="73e9ba4b:14a46685045:-7ece" name="FK_SINTOMA_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_ESPECIALIDAD" referenced-table="ESPECIALIDAD" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="0..1" target-relationship-type="">
+<foreign-key-column column-name="codEsp" referenced-key-column-name="codEsp"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="73e9ba4b:14a46685045:-7e91" name="EMERGENCIA">
+<column-list>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8d" mandatory="false" name="codEmergencia">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8c" mandatory="false" name="latitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8b" mandatory="false" name="longitud">
+<data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8a" mandatory="false" name="fecha">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e89" mandatory="false" name="hora">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e48" mandatory="false" name="codSintoma">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e0e" mandatory="false" name="nombreH">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7dc3" mandatory="false" name="DNI">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7e90" name="PK_EMERGENCIA"/>
+<foreign-key-list>
+<foreign-key id="73e9ba4b:14a46685045:-7e4a" name="FK_EMERGENCIA_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SINTOMA" referenced-table="SINTOMA" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="codSintoma" referenced-key-column-name="codSintoma"/>
+</foreign-key>
+<foreign-key id="73e9ba4b:14a46685045:-7e10" name="FK_EMERGENCIA_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_HOSPITAL" referenced-table="HOSPITAL" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="nombreH" referenced-key-column-name="nombreH"/>
+</foreign-key>
+<foreign-key id="73e9ba4b:14a46685045:-7dc5" name="FK_EMERGENCIA_3" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_PACIENTE" referenced-table="PACIENTE" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="0..1" target-relationship-type="">
+<foreign-key-column column-name="DNI" referenced-key-column-name="DNI"/>
+</foreign-key>
+</foreign-key-list>
+</table>
+<table id="73e9ba4b:14a46685045:-7df4" name="PACIENTE">
+<column-list>
+<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7df0" mandatory="true" name="DNI">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7def" mandatory="false" name="nombre">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7dee" mandatory="false" name="apellidos">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="30" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7ded" mandatory="false" name="direccion">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7dec" mandatory="false" name="telefono">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7deb" mandatory="false" name="int">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
+<column auto-increment="false" column-size="1" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7dea" mandatory="false" name="sexo">
+<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+</column>
+</column-list>
+<primary-key id="73e9ba4b:14a46685045:-7df3" name="PK_PACIENTE">
+<primary-key-column name="DNI"/>
+</primary-key>
+</table>
+</table-list>
+</schema>
+</schema-list>
 </database-model>
-<diagram/>
+<diagram>
+<table-figure height="134" refid="73e9ba4b:14a46685045:-8000" width="132" x="82" y="47"/>
+<table-figure refid="73e9ba4b:14a46685045:-7f9d" x="406" y="48"/>
+<table-figure refid="73e9ba4b:14a46685045:-7f56" x="623" y="136"/>
+<table-figure refid="73e9ba4b:14a46685045:-7efd" x="561" y="328"/>
+<table-figure refid="73e9ba4b:14a46685045:-7e91" x="281" y="261"/>
+<table-figure refid="73e9ba4b:14a46685045:-7df4" x="51" y="292"/>
+</diagram>
 </clay-model>
