@@ -27,6 +27,10 @@ public ServicioEmergencia() throws LogicaExcepcion
 	this.dal = DAL.getSingleton();
 }
 	
+	public void anyadir(Emergencia e){
+		emergencias.add(e);
+	}
+
 	public void anyadir(Hospital b)
 	{
 		hospitales.add(b);
