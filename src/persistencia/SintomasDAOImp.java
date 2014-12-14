@@ -12,7 +12,7 @@ public class SintomasDAOImp implements ISintomasDAO {
 	public SintomasDAOImp() throws DAOExcepcion {
 		super();
 		try{
-			connManager= new ConnectionManager("emergencias");
+			connManager= new ConnectionManager("emergenciasDB");
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}

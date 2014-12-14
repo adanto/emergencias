@@ -16,7 +16,7 @@ public class HospitalDAOImp implements IHospital{
 	public HospitalDAOImp() throws DAOExcepcion {
 		super();
 		try{
-			connManager= new ConnectionManager("emergencias");
+			connManager= new ConnectionManager("emergenciasDB");
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}
@@ -25,7 +25,7 @@ public class HospitalDAOImp implements IHospital{
 	{
 		try{
 			connManager.connect();
-			connManager.updateDB("insert into Hospital(nombre, direccion, latitud, longitud) values ('"+h.getNombre()+"','"+h.getDireccion()+"','"+h.getLatitud()+"', '"+h.getLongitud()+"')");
+			connManager.updateDB("insert into Hospital(nombreH, direccion, latitud, longitud) values ('"+h.getNombre()+"','"+h.getDireccion()+"','"+h.getLatitud()+"', '"+h.getLongitud()+"')");
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);	}
@@ -34,7 +34,7 @@ public class HospitalDAOImp implements IHospital{
 	public Hospital buscaHospital(String nombre)throws DAOExcepcion{
 		try{
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("select * from Hospital where NOMBRE= '"+nombre+"'");
+			ResultSet rs=connManager.queryDB("select * from Hospital where NOMBREH= '"+nombre+"'");
 			connManager.close();
 		
 			if (rs.next())
@@ -55,7 +55,7 @@ public class HospitalDAOImp implements IHospital{
 				
 			try{				
 				while (rs.next()){
-					Hospital h = buscaHospital(rs.getString("NOMBRE"));	 
+					Hospital h = buscaHospital(rs.getString("NOMBREH"));	 
 					listaHospital.add(h);
 				}
 				return listaHospital;
@@ -68,14 +68,15 @@ public class HospitalDAOImp implements IHospital{
 	public List <Especialidad> listaEspecialidad(String nombre) throws DAOExcepcion{
 		try{
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("select DISTINCT E.id from hospital A, especialidad E where A.nombre='"+nombre+"' and  E.nombre = A.nombre ");						
+			ResultSet rs=connManager.queryDB("select DISTINCT E.codEsp from hospital A, especialidad E where A.nombreH='"+nombre+"' and  E.nombreH = A.nombreH ");						
+
 			connManager.close();
 	  	  
 			List<Especialidad> listaEspecialidad=new ArrayList<Especialidad>();
 				
 			try{				
 				while (rs.next()){
-					Especialidad e= buscaEspecialidad(rs.getString("ID"));
+					Especialidad e= buscaEspecialidad(rs.getString("codEsp"));
 					listaEspecialidad.add(e);
 				}
 				return listaEspecialidad;
@@ -88,7 +89,7 @@ public class HospitalDAOImp implements IHospital{
 	public Especialidad buscaEspecialidad(String nombre)throws DAOExcepcion{
 		try{
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("select * from Especialidad where ID= '"+nombre+"'");
+			ResultSet rs=connManager.queryDB("select * from Especialidad where codEsp= '"+nombre+"'");
 			connManager.close();
 		
 			if (rs.next())

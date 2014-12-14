@@ -23,7 +23,7 @@ public class PacienteDAOImp implements IPacienteDAO {
 	public PacienteDAOImp() throws DAOExcepcion {
 		super();
 		try{
-			connManager= new ConnectionManager("emergencias");
+			connManager= new ConnectionManager("emergenciasDB");
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}

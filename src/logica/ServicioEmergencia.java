@@ -36,6 +36,7 @@ public ServicioEmergencia() throws LogicaExcepcion
 	{
 		if(this.pacientes.containsKey(p.getDni())){
 			try{
+				pacientes.remove(p.getDni());
 				System.out.println("Hemos llegado a borrar");
 				DAL.getSingleton().borrarPaciente(p);
 				pacientes.remove(p);
@@ -99,24 +100,6 @@ public ServicioEmergencia() throws LogicaExcepcion
 			if(elemento.getNombre().equals(nombre)) { salida = elemento; }
 		}
 		return salida;		
-	}
-	
-	public void listaAmbulancias(){
-		for(int i = 0; i<ambulancias.size(); i++){
-			Ambulancia A = ambulancias.get(i);
-			if(A!=null){
-				System.out.println("Numero = "+A.getEquipo()+" y numRegistro "+A.getNumRegistro());
-			}
-		}
-	}
-	public void listAmbulancias() throws LogicaExcepcion{
-
-		Ambulancia pasando = null;
-		Iterator<Ambulancia> iteratorcito = ambulancias.listIterator();
-		while(iteratorcito.hasNext()){
-			pasando=iteratorcito.next();
-			System.out.println("Numero: "+pasando.getNumRegistro()+" Disponibilidad: "+pasando.getDisp()+" Lat: "+pasando.getLatitud()+" Long: "+pasando.getLongitud());
-		}
 	}
 	
 	public Ambulancia buscarA(int A) throws LogicaExcepcion

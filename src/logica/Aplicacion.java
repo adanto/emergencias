@@ -127,7 +127,7 @@ public class Aplicacion {
 				emergencias.numeroAmbulancias();
 				break;
 			case 8:
-				emergencias.listaAmbulancias();
+				System.out.println("Este metodo no está implementedo (innecesario)");
 				break;
 			case 9:
 				emergencias.setDisp(3, true);
@@ -136,7 +136,7 @@ public class Aplicacion {
 				emergencias.cambiarCoor(3, 10, 11);
 				break;
 			case 11:
-				emergencias.listarEspecialidad("Hospital1");
+				emergencias.listarEspecialidad("Valencia del Mar");
 				emergencias.especialidadesLocal();
 				break;
 			case 12:
