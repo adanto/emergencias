@@ -18,8 +18,7 @@ public class ServicioEmergencia {
 	private ArrayList <Emergencia> emergencias;
 	private DAL dal;
 	
-public ServicioEmergencia() throws LogicaExcepcion
-{
+public ServicioEmergencia() throws LogicaExcepcion{
 	this.pacientes = new HashMap<String,Paciente>();
 	this.especialidad= new ArrayList<Especialidad>();
 	this.ambulancias = new ArrayList<Ambulancia>();
