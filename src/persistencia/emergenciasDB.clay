@@ -98,6 +98,9 @@
 <column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7d7f" mandatory="false" name="nombreH">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6c787d5:14a48f869d8:-7e98" mandatory="false" name="codEmergencia">
+<data-type name="INT" selected-variant-pattern="INT"/>
+</column>
 </column-list>
 <primary-key id="73e9ba4b:14a46685045:-7efc" name="PK_SINTOMA">
 <primary-key-column name="codSintoma"/>
@@ -107,12 +110,15 @@
 <foreign-key-column column-name="codEsp" referenced-key-column-name="codEsp"/>
 <foreign-key-column column-name="nombreH" referenced-key-column-name="nombreH"/>
 </foreign-key>
+<foreign-key id="6c787d5:14a48f869d8:-7e63" name="FK_SINTOMA_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_EMERGENCIA" referenced-table="EMERGENCIA" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
+<foreign-key-column column-name="codEmergencia" referenced-key-column-name="codEmergencia"/>
+</foreign-key>
 </foreign-key-list>
 </table>
 <table id="73e9ba4b:14a46685045:-7e91" name="EMERGENCIA">
 <column-list>
-<column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8d" mandatory="false" name="codEmergencia">
-<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8d" mandatory="true" name="codEmergencia">
+<data-type name="INT" selected-variant-pattern="INT"/>
 </column>
 <column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e8c" mandatory="false" name="latitud">
 <data-type name="DOUBLE" selected-variant-pattern="DOUBLE"/>
@@ -126,24 +132,20 @@
 <column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e89" mandatory="false" name="hora">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
-<column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e48" mandatory="false" name="codSintoma">
-<data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
-</column>
 <column auto-increment="false" column-size="20" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7e0e" mandatory="false" name="nombreH">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
 <column auto-increment="false" column-size="10" decimal-digits="0" default-value="" id="73e9ba4b:14a46685045:-7dc3" mandatory="false" name="DNI">
 <data-type name="CHAR" selected-variant-pattern="CHAR(%n)"/>
 </column>
-<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6c787d5:14a48f869d8:-7fb9" mandatory="true" name="numRegistro">
+<column auto-increment="false" column-size="0" decimal-digits="0" default-value="" id="6c787d5:14a48f869d8:-7fb9" mandatory="false" name="numRegistro">
 <data-type name="INT" selected-variant-pattern="INT"/>
 </column>
 </column-list>
-<primary-key id="73e9ba4b:14a46685045:-7e90" name="PK_EMERGENCIA"/>
+<primary-key id="73e9ba4b:14a46685045:-7e90" name="PK_EMERGENCIA">
+<primary-key-column name="codEmergencia"/>
+</primary-key>
 <foreign-key-list>
-<foreign-key id="73e9ba4b:14a46685045:-7e4a" name="FK_EMERGENCIA_1" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_SINTOMA" referenced-table="SINTOMA" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
-<foreign-key-column column-name="codSintoma" referenced-key-column-name="codSintoma"/>
-</foreign-key>
 <foreign-key id="73e9ba4b:14a46685045:-7e10" name="FK_EMERGENCIA_2" on-delete="UNSPECIFIED" on-update="UNSPECIFIED" referenced-key="PK_HOSPITAL" referenced-table="HOSPITAL" referenced-table-schema="DEFAULT_SCHEMA" source-entity-role="" source-multiplicity="0..*" source-relationship-type="" target-entity-role="" target-multiplicity="1" target-relationship-type="">
 <foreign-key-column column-name="nombreH" referenced-key-column-name="nombreH"/>
 </foreign-key>
@@ -191,8 +193,8 @@
 <table-figure height="134" refid="73e9ba4b:14a46685045:-8000" width="132" x="82" y="47"/>
 <table-figure refid="73e9ba4b:14a46685045:-7f9d" x="369" y="25"/>
 <table-figure refid="73e9ba4b:14a46685045:-7f56" x="611" y="78"/>
-<table-figure refid="73e9ba4b:14a46685045:-7efd" x="594" y="291"/>
-<table-figure refid="73e9ba4b:14a46685045:-7e91" x="281" y="261"/>
+<table-figure refid="73e9ba4b:14a46685045:-7efd" x="608" y="305"/>
+<table-figure refid="73e9ba4b:14a46685045:-7e91" x="270" y="248"/>
 <table-figure refid="73e9ba4b:14a46685045:-7df4" x="51" y="292"/>
 </diagram>
 </clay-model>

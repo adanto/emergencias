@@ -2,6 +2,7 @@ package persistencia;
 
 import java.util.List;
 
+import logica.Emergencia;
 import logica.Especialidad;
 import logica.Ambulancia;
 import logica.Hospital;
@@ -15,6 +16,7 @@ public class DAL {
 	IPacienteDAO pacienteDAO;
 	IAmbulanciaDAO ambulanciaDAO;
 	IHospital hospitalDAO;
+	IEmergenciaDAO emergenciaDAO;
 	// constructor privado
 	private DAL() throws DAOExcepcion {
 		this.pacienteDAO = new PacienteDAOImp();
@@ -51,6 +53,17 @@ public class DAL {
 		}catch(DAOExcepcion e)
 		{
 			throw new DAOExcepcion("No se pudo crear el paciente.");
+		}
+	}
+	public void crearEmergencia(Emergencia em) throws DAOExcepcion 
+	{
+		try
+		{
+		emergenciaDAO = new EmergenciasDAOImp();
+		emergenciaDAO.crearEmergencia(em);
+		}catch(DAOExcepcion e)
+		{
+			throw new DAOExcepcion("No se pudo crear la emergencia.");
 		}
 	}
 
@@ -93,13 +106,21 @@ public class DAL {
 	public Ambulancia buscarAmbulancia(int numero) throws LogicaExcepcion 
 	{
 		try{
-	ambulanciaDAO = new AmbulanciaDAOImp();
+			ambulanciaDAO = new AmbulanciaDAOImp();
 
-	return ambulanciaDAO.buscarAmbulancia(numero);
-	}catch(DAOExcepcion e)
-	{
-		throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
+			return ambulanciaDAO.buscarAmbulancia(numero);
+		}catch(DAOExcepcion e)
+		{
+			throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
+		}
 	}
+	public Emergencia buscarEmergencia(int numero) throws LogicaExcepcion{
+		try{
+			emergenciaDAO = new EmergenciasDAOImp();
+			return emergenciaDAO.buscarEmergencia(numero);
+		}catch(DAOExcepcion e){
+			throw new LogicaExcepcion("No se encuentra la emergencia");
+		}
 	}
 	
 	public void cambiarCoor(int num, float latitud, float longitud) throws DAOExcepcion 

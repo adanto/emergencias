@@ -23,17 +23,44 @@ public ServicioEmergencia() throws LogicaExcepcion
 	this.pacientes = new HashMap<String,Paciente>();
 	this.especialidad= new ArrayList<Especialidad>();
 	this.ambulancias = new ArrayList<Ambulancia>();
+	this.emergencias = new ArrayList<Emergencia>();
 	this.dal = DAL.getSingleton();
 }
-	
-	public void anyadir(Emergencia e){
-		emergencias.add(e);
-	}
 
-	public void anyadir(Hospital b)
-	{
-		hospitales.add(b);
+	public void anyadir(Emergencia em) throws LogicaExcepcion{
+		if(buscarEM(em.getCodEmergencia())==null)
+			try{
+				DAL.getSingleton().crearEmergencia(em);
+				emergencias.add(em);
+			}
+			catch(DAOExcepcion e){
+				e.printStackTrace();
+			};
 	}
+	public Emergencia buscarEM(int cod){
+		boolean encontrado = false;
+		Emergencia encont = null;
+		Emergencia pasando = null;
+		Iterator<Emergencia> iteratorcito = emergencias.listIterator();
+		while(iteratorcito.hasNext() && !encontrado){
+			pasando = iteratorcito.next();
+			if(pasando.getCodEmergencia()==cod){
+				encontrado = true;
+				encont = pasando;
+			}
+		}
+		if(!encontrado){
+				try{
+					encont = DAL.getSingleton().buscarEmergencia(cod);
+				}catch(LogicaExcepcion e)
+				{
+					e.printStackTrace();
+				}
+			}
+	
+		return encont;
+	}
+			
 	
 	public void borrar(Paciente p) throws LogicaExcepcion
 	{

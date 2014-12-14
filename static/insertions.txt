@@ -1,9 +1,10 @@
 ﻿DROP TABLE EMERGENCIA IF EXISTS;
 DROP TABLE SINTOMA IF EXISTS;
-DROP TABLE ESPECIALIDAD IF EXISTS;
 DROP TABLE AMBULANCIA IF EXISTS;
+DROP TABLE ESPECIALIDAD IF EXISTS;
 DROP TABLE PACIENTE IF EXISTS;
 DROP TABLE HOSPITAL IF EXISTS;
+
 
 CREATE TABLE HOSPITAL (
        nombreH CHAR(20) NOT NULL
@@ -24,6 +25,14 @@ CREATE TABLE PACIENTE (
      , PRIMARY KEY (DNI)
 );
 
+CREATE TABLE ESPECIALIDAD (
+       codEsp CHAR(20) NOT NULL
+     , nombreH CHAR(20) NOT NULL
+     , PRIMARY KEY (codEsp, nombreH)
+     , CONSTRAINT FK_ESPECIALIDAD_1 FOREIGN KEY (nombreH)
+                  REFERENCES HOSPITAL (nombreH)
+);
+
 CREATE TABLE AMBULANCIA (
        numRegistro INT NOT NULL
      , equipo CHAR(10)
@@ -38,12 +47,22 @@ CREATE TABLE AMBULANCIA (
                   REFERENCES HOSPITAL (nombreH)
 );
 
-CREATE TABLE ESPECIALIDAD (
-       codEsp CHAR(20) NOT NULL
-     , nombreH CHAR(20) NOT NULL
-     , PRIMARY KEY (codEsp, nombreH)
-     , CONSTRAINT FK_ESPECIALIDAD_1 FOREIGN KEY (nombreH)
+CREATE TABLE EMERGENCIA (
+       codEmergencia INT NOT NULL
+     , latitud DOUBLE
+     , longitud DOUBLE
+     , fecha CHAR(10)
+     , hora CHAR(10)
+     , nombreH CHAR(20)
+     , DNI CHAR(10)
+     , numRegistro INT
+     , PRIMARY KEY (codEmergencia)
+     , CONSTRAINT FK_EMERGENCIA_2 FOREIGN KEY (nombreH)
                   REFERENCES HOSPITAL (nombreH)
+     , CONSTRAINT FK_EMERGENCIA_3 FOREIGN KEY (DNI)
+                  REFERENCES PACIENTE (DNI)
+     , CONSTRAINT FK_EMERGENCIA_4 FOREIGN KEY (numRegistro)
+                  REFERENCES AMBULANCIA (numRegistro)
 );
 
 CREATE TABLE SINTOMA (
@@ -53,30 +72,14 @@ CREATE TABLE SINTOMA (
      , duracion DOUBLE
      , codEsp CHAR(20)
      , nombreH CHAR(20)
+     , codEmergencia INT
      , PRIMARY KEY (codSintoma)
      , CONSTRAINT FK_SINTOMA_1 FOREIGN KEY (codEsp, nombreH)
                   REFERENCES ESPECIALIDAD (codEsp, nombreH)
+     , CONSTRAINT FK_SINTOMA_2 FOREIGN KEY (codEmergencia)
+                  REFERENCES EMERGENCIA (codEmergencia)
 );
 
-CREATE TABLE EMERGENCIA (
-       codEmergencia CHAR(10)
-     , latitud DOUBLE
-     , longitud DOUBLE
-     , fecha CHAR(10)
-     , hora CHAR(10)
-     , codSintoma CHAR(20)
-     , nombreH CHAR(20)
-     , DNI CHAR(10)
-     , numRegistro INT NOT NULL
-     , CONSTRAINT FK_EMERGENCIA_1 FOREIGN KEY (codSintoma)
-                  REFERENCES SINTOMA (codSintoma)
-     , CONSTRAINT FK_EMERGENCIA_2 FOREIGN KEY (nombreH)
-                  REFERENCES HOSPITAL (nombreH)
-     , CONSTRAINT FK_EMERGENCIA_3 FOREIGN KEY (DNI)
-                  REFERENCES PACIENTE (DNI)
-     , CONSTRAINT FK_EMERGENCIA_4 FOREIGN KEY (numRegistro)
-                  REFERENCES AMBULANCIA (numRegistro)
-);
 
 
 INSERT INTO hospital VALUES ('Valencia del Mar', 'Carrer del Riu Tajo, 1', 39.4777, -0.3298)

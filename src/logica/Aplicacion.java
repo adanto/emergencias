@@ -32,7 +32,8 @@ public class Aplicacion {
 			System.out.println("10- Cambia direccion de la ambulancia 3");
 			System.out.println("11- Lista todas las especialidades del hospital de nombre Hospital1");
 			System.out.println("12- Numero de hospitales totales en la DB");
-			System.out.println("13- Información de todos los hospitales de la DB\n");
+			System.out.println("13- Información de todos los hospitales de la DB");
+			System.out.println("14- Get Emergencia a lo pro\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -144,6 +145,11 @@ public class Aplicacion {
 				break;
 			case 13:
 				emergencias.nombHospitales();
+				break;
+			case 14:
+				Emergencia em = emergencias.buscarEM(1);
+				System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
+				System.out.println(em.getHosp());
 				break;
 			}
 		}

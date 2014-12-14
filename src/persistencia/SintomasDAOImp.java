@@ -54,7 +54,7 @@ public class SintomasDAOImp implements ISintomasDAO {
 			connManager.close();
 		
 			if (rs.next())
-				return new Sintoma(nombre, rs.getString("DESCRIPCION"), rs.getInt("DURACION"), rs.getString("ESTADO"));
+				return new Sintoma(nombre, rs.getString("DESCRIPCION"), rs.getInt("DURACION"), rs.getString("ESTADO"), rs.getInt("CODEMERGENCIA"));
 			else
 				return null;	
 		}
