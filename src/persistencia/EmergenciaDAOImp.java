@@ -1,16 +1,14 @@
 package persistencia;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
-import logica.Ambulancia;
 import logica.Emergencia;
 import excepciones.DAOExcepcion;
 
-public class EmergenciasDAOImp implements IEmergenciaDAO{
+public class EmergenciaDAOImp implements IEmergenciaDAO{
 	protected ConnectionManager connManager;
 
-	public EmergenciasDAOImp() throws DAOExcepcion {
+	public EmergenciaDAOImp() throws DAOExcepcion {
 		super();
 		try{
 			connManager= new ConnectionManager("emergenciasDB");

@@ -48,7 +48,7 @@ public class DAL {
 	public int ambMinima(double lon, double lat) throws DAOExcepcion{
 		int amb = -1;
 		try{
-			emergenciaDAO = new EmergenciasDAOImp();
+			emergenciaDAO = new EmergenciaDAOImp();
 			amb = emergenciaDAO.ambMinima(lon, lat);
 		}catch(DAOExcepcion e){
 			throw new DAOExcepcion("No se pudo encontrar la ambulancia mínima.");
@@ -70,7 +70,7 @@ public class DAL {
 	{
 		try
 		{
-		emergenciaDAO = new EmergenciasDAOImp();
+		emergenciaDAO = new EmergenciaDAOImp();
 		emergenciaDAO.crearEmergencia(em);
 		}catch(DAOExcepcion e)
 		{
@@ -127,7 +127,7 @@ public class DAL {
 	}
 	public Emergencia buscarEmergencia(int numero) throws LogicaExcepcion{
 		try{
-			emergenciaDAO = new EmergenciasDAOImp();
+			emergenciaDAO = new EmergenciaDAOImp();
 			return emergenciaDAO.buscarEmergencia(numero);
 		}catch(DAOExcepcion e){
 			throw new LogicaExcepcion("No se encuentra la emergencia");

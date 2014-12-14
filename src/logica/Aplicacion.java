@@ -34,7 +34,8 @@ public class Aplicacion {
 			System.out.println("12- Numero de hospitales totales en la DB");
 			System.out.println("13- Información de todos los hospitales de la DB");
 			System.out.println("14- Get Emergencia a lo pro");
-			System.out.println("15- Obtener el numero de ambulancia más cercano a una posición\n");
+			System.out.println("15- Obtener el numero de ambulancia más cercano a una posición");
+			System.out.println("16- Query del caso de uso para obtener la mejor ambulancia - Testing strings\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -157,7 +158,15 @@ public class Aplicacion {
 				System.out.println("Ambulancia más cercana a (-10, 10) es la numRegistro: "+emergencias.ambMinima(-10,10));
 				System.out.println("Ambulancia más cercana a (10, -10) es la numRegistro: "+emergencias.ambMinima(10,-10));
 				System.out.println("Ambulancia más cercana a (-10, -10) es la numRegistro: "+emergencias.ambMinima(-10,-10));
-			}
+				break;
+			case 16:
+				int lon = 1, lat = 2;
+				String query1 = "SELECT A.numRegistro, ((A.latitud-'"+lon+"')*(A.latitud-'"+lon+"')+(A.longitud-'"+lat+"')*(A.longitud-'"+lat+"')+(H.latitud-'"+lon+"')*(H.latitud-'"+lon+"')+(H.longitud-'"+lat+"')*(H.longitud-'"+lat+"')) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE ORDER BY Distancia";
+				String query2 = "SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))=(SELECT MIN((H1.longitud-'"+lon+"')*(H1.longitud-'"+lon+"')+(H1.latitud-'"+lat+"')*(H1.latitud-'"+lat+"')) FROM Hospital H1) AND ((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"'))=(SELECT MIN((A1.longitud-'"+lon+"')*(A1.longitud-'"+lon+"')+(A1.latitud-'"+lat+"')*(A1.latitud-'"+lat+"')) FROM Ambulancia A1 WHERE A1.tipo = 'P' AND A1.disponibilidad = TRUE)";
+				System.out.println(query1);
+				System.out.println(query2);
+				}
+			break;
 		}
 	}
 }
