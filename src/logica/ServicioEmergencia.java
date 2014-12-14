@@ -16,12 +16,13 @@ public class ServicioEmergencia {
 	private ArrayList <RegistroEmergencia> registros;
 	private HashMap <String,Paciente> pacientes;
 	private ArrayList <Especialidad> especialidad;
+	private ArrayList <Emergencia> emergencias;
 	private DAL dal;
 	
 public ServicioEmergencia() throws LogicaExcepcion
 {
 	this.pacientes = new HashMap<String,Paciente>();
-	this.especialidad=new ArrayList<Especialidad>();
+	this.especialidad= new ArrayList<Especialidad>();
 	this.ambulancias = new ArrayList<Ambulancia>();
 	this.dal = DAL.getSingleton();
 }
