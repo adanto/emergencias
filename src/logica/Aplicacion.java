@@ -1,5 +1,6 @@
 package logica;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import excepciones.DAOExcepcion;
@@ -37,7 +38,9 @@ public class Aplicacion {
 			System.out.println("13- Información de todos los hospitales de la DB");
 			System.out.println("14- Get Emergencia a lo pro");
 			System.out.println("15- Obtener el numero de ambulancia más cercano a una posición");
-			System.out.println("16- Query del caso de uso para obtener la mejor ambulancia - Testing strings\n");
+			System.out.println("16- Query del caso de uso para obtener la mejor ambulancia - Testing strings");
+			System.out.println("17- Obtener el nombre del hospital más cercano a una posición");
+			System.out.println("18- Obtener la lista de emergencias\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -171,6 +174,15 @@ public class Aplicacion {
 				System.out.println(query1);
 				System.out.println(query2);
 				break;
+
+			case 17:
+				System.out.println("Hospital más cercana a (10, 10) es la nombreH: "+emergencias.hospMinimo(10,10));
+				System.out.println("Hospital más cercana a (-10, 10) es la nombreH: "+emergencias.hospMinimo(-10,10));
+				System.out.println("Hospital más cercana a (10, -10) es la nombreH: "+emergencias.hospMinimo(10,-10));
+				System.out.println("Hospital más cercana a (-10, -10) es la nombreH: "+emergencias.hospMinimo(-10,-10));
+				break;
+			case 18:
+				List<Emergencia> emergenciasList = emergencias.listaEmergencias();
 			}
 		}
 	}

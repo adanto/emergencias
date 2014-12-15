@@ -26,16 +26,36 @@ public ServicioEmergencia() throws LogicaExcepcion{
 	this.hospitales=new ArrayList<Hospital>();
 	this.dal = DAL.getSingleton();
 }
-
-	public int ambMinima(double d, double f) throws LogicaExcepcion{
-		int amb = -1;
-		try{
-			amb = DAL.getSingleton().ambMinima(d, f);
-		}catch(DAOExcepcion e){
-			e.printStackTrace();
-		};
-		return amb;
+public List <Emergencia> listaEmergencias() throws DAOExcepcion, LogicaExcepcion{
+	List<Emergencia> emergencias = null;
+	try{
+		emergencias = dal.listarEmergencias();
+	}catch(LogicaExcepcion e){
+		  e.printStackTrace(); 
+		  throw new LogicaExcepcion("La lista de emergencias no puede ser recuperada");
+		
 	}
+	return emergencias;
+}
+
+public int ambMinima(double d, double f) throws LogicaExcepcion{
+	int amb = -1;
+	try{
+		amb = DAL.getSingleton().ambMinima(d, f);
+	}catch(DAOExcepcion e){
+		e.printStackTrace();
+	};
+	return amb;
+}
+public String hospMinimo(double d, double f) throws LogicaExcepcion{
+	String amb = "-1";
+	try{
+		amb = DAL.getSingleton().hospMinimo(d, f);
+	}catch(DAOExcepcion e){
+		e.printStackTrace();
+	};
+	return amb;
+}
 
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
 		//setBest(em);

@@ -9,4 +9,6 @@ public interface IEmergenciaDAO {
 	public void crearEmergencia(Emergencia e) throws DAOExcepcion;
 	public List<Emergencia> listarEmergencias() throws DAOExcepcion;
 	public int ambMinima(double lon, double lat) throws DAOExcepcion;
+	public String hospMinimo(double lon, double lat) throws DAOExcepcion;
+	public List <Emergencia> listaEmergencias() throws DAOExcepcion;
 }

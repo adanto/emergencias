@@ -58,7 +58,7 @@ public class DAL {
 		throw new LogicaExcepcion("No encontrado.");
 	}
 	}
-	
+
 	public int ambMinima(double lon, double lat) throws DAOExcepcion{
 		int amb = -1;
 		try{
@@ -66,6 +66,16 @@ public class DAL {
 			amb = emergenciaDAO.ambMinima(lon, lat);
 		}catch(DAOExcepcion e){
 			throw new DAOExcepcion("No se pudo encontrar la ambulancia mínima.");
+		}
+		return amb;
+	}
+	public String hospMinimo(double lon, double lat) throws DAOExcepcion{
+		String amb = "-1";
+		try{
+			emergenciaDAO = new EmergenciaDAOImp();
+			amb = emergenciaDAO.hospMinimo(lon, lat);
+		}catch(DAOExcepcion e){
+			throw new DAOExcepcion("No se pudo encontrar el hospital mínimo.");
 		}
 		return amb;
 	}
@@ -103,7 +113,7 @@ public class DAL {
 			throw new DAOExcepcion("No se pudo borrar el paciente.");
 		}
 	}
-	
+
 	public List<Paciente> listarPacientes() throws LogicaExcepcion
 	{
 		try
@@ -113,6 +123,17 @@ public class DAL {
 		catch (DAOExcepcion e)
 		{
 			throw new LogicaExcepcion("No se pudo listar los pacientes.");
+		}
+	}
+	public List<Emergencia> listarEmergencias() throws LogicaExcepcion
+	{
+		try
+		{
+			return(new EmergenciaDAOImp()).listarEmergencias();
+		}
+		catch (DAOExcepcion e)
+		{
+			throw new LogicaExcepcion("No se pudo listar las emergencias.");
 		}
 	}
 	
