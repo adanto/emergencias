@@ -74,6 +74,7 @@ public class ConsultaPaciente extends JDialog {
 					ServicioEmergencia s= new ServicioEmergencia();
 					Paciente p=s.buscarP(textField.getText());
 					if(p==null){
+						System.out.println("penenautilus");
 						AltaPacienteJDialog a=new AltaPacienteJDialog();
 						a.show();
 						dispose();

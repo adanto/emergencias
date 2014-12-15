@@ -1,7 +1,5 @@
 package persistencia;
 
-//import HospitalDAOImp;
-
 import java.util.List;
 
 import logica.Emergencia;
@@ -36,8 +34,6 @@ public class DAL {
 	//*****************************************************************************
 	// Servicios para el C.U. Alta Paciente
 	//*****************************************************************************
-
-
 	public Paciente buscarPaciente(String dni) throws LogicaExcepcion 
 	{
 		try{
@@ -45,17 +41,7 @@ public class DAL {
 	return pacienteDAO.buscarPaciente(dni);
 	}catch(DAOExcepcion e)
 	{
-		throw new LogicaExcepcion("No encontrado.");
-	}
-	}
-	public Paciente buscarPacienteNom(String nombre) throws LogicaExcepcion 
-	{
-		try{
-	pacienteDAO = new PacienteDAOImp();
-	return pacienteDAO.buscarPacienteNom(nombre);
-	}catch(DAOExcepcion e)
-	{
-		throw new LogicaExcepcion("No encontrado.");
+		throw new LogicaExcepcion("No se pudo crear el paciente.");
 	}
 	}
 	
@@ -189,6 +175,17 @@ public class DAL {
 		catch (DAOExcepcion e)
 		{
 			throw new LogicaExcepcion("No se pudo listar los pacientes.");
+		}
+	}
+	public List<Hospital> listarHospital() throws LogicaExcepcion
+	{
+		try
+		{
+			return(new HospitalDAOImp()).listaHospitales();
+		}
+		catch (DAOExcepcion e)
+		{
+			throw new LogicaExcepcion("No se pudo listar los hospitales.");
 		}
 	}
 }

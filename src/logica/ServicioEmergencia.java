@@ -23,6 +23,7 @@ public ServicioEmergencia() throws LogicaExcepcion{
 	this.especialidad= new ArrayList<Especialidad>();
 	this.ambulancias = new ArrayList<Ambulancia>();
 	this.emergencias = new ArrayList<Emergencia>();
+	this.hospitales=new ArrayList<Hospital>();
 	this.dal = DAL.getSingleton();
 }
 
@@ -205,6 +206,24 @@ public ServicioEmergencia() throws LogicaExcepcion{
 		System.out.print(this.ambulancias.size());
 	}
 	
+	public Paciente buscarPNombre(String nombre) throws LogicaExcepcion
+	{
+		Paciente p = null;
+			try{
+				p = DAL.getSingleton().buscarPacienteNom(nombre);
+				if(p!=null)
+				{
+					this.pacientes.put(p.getDni(), p);
+				}
+			}
+			catch(LogicaExcepcion e)
+			{
+				e.printStackTrace();
+			}
+		
+			return p;
+	}
+
 	public Paciente buscarP(String dni) throws LogicaExcepcion
 	{
 		Paciente p = this.pacientes.get(dni);
@@ -222,9 +241,9 @@ public ServicioEmergencia() throws LogicaExcepcion{
 			{
 				e.printStackTrace();
 			}
+		}
+			return p;
 	}
-		return p;
-}
 	
 	public List<Hospital> getHospitales() throws LogicaExcepcion{
 		List<Hospital>dbHospital =null;
@@ -292,5 +311,24 @@ public ServicioEmergencia() throws LogicaExcepcion{
 				System.out.println(A.getNombre());
 			}
 		}
+	}
+	
+	public List<Hospital> listarHospital(){
+		
+		try
+		{
+			List<Hospital>dbHospital = dal.listarHospitales();
+		for (Hospital p : dbHospital)
+			if(!this.hospitales.contains(p.getNombre()))
+			{
+				this.hospitales.add(p);
+			}
+		}
+		catch(LogicaExcepcion e)
+		{
+		  e.printStackTrace(); 
+		 
+		}
+		return this.hospitales;
 	}
 }

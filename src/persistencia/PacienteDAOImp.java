@@ -71,7 +71,7 @@ public class PacienteDAOImp implements IPacienteDAO {
 			}
 		catch (DAOExcepcion e){		throw e;}	
 	 }
-	  
+
 	public Paciente buscarPaciente(String dni)throws DAOExcepcion{
 		try{
 			connManager.connect();
@@ -85,5 +85,19 @@ public class PacienteDAOImp implements IPacienteDAO {
 		}
 		catch (SQLException e){	throw new DAOExcepcion(e);}	
 	}
+	public Paciente buscarPacienteNom(String nombre)throws DAOExcepcion{
+		try{
+			connManager.connect();
+			ResultSet rs=connManager.queryDB("select * from PACIENTE where nombre= '"+nombre+"'");
+			connManager.close();
+		
+			if (rs.next())
+				return new Paciente(rs.getString("DNI"),nombre,rs.getString("APELLIDOS"), rs.getString("DIRECCION"),rs.getInt("TELEFONO"),rs.getInt("EDAD"),rs.getString("SEXO").charAt(0));
+			else
+				return null;	
+		}
+		catch (SQLException e){	throw new DAOExcepcion(e);}	
+	}
+
 
 }

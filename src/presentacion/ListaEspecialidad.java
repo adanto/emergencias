@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import logica.Especialidad;
+import logica.Hospital;
 import logica.Paciente;
 import logica.ServicioEmergencia;
 
@@ -33,8 +34,8 @@ import java.awt.event.MouseEvent;
 public class ListaEspecialidad extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	
+	ServicioEmergencia h;
+	private int count=0;
 
 	/**
 	 * Launch the application.
@@ -82,22 +83,31 @@ public class ListaEspecialidad extends JDialog {
 		btnCancel.setBounds(269, 175, 91, 23);
 		contentPanel.add(btnCancel);
 		
+		final JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(79, 23, 158, 17);
+		contentPanel.add(comboBox_1);
+		h=new ServicioEmergencia();
+		List<Hospital> hospital= h.getHospitales();
+		Iterator<Hospital> hosp=hospital.iterator();
+		while(hosp.hasNext()){
+			comboBox_1.addItem(hosp.next().getNombre());
+		}
+		
 		JLabel lblHospital = new JLabel("Hospital: ");
 		lblHospital.setBounds(26, 26, 61, 14);
 		contentPanel.add(lblHospital);
-		
-		textField = new JTextField();
-		textField.setBounds(79, 23, 114, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(count>1){comboBox.removeAllItems();}
 				try {
-					ServicioEmergencia h=new ServicioEmergencia();
-					List<Especialidad> a= h.listarEspecialidad(textField.getText());
+					count++;
+					String nom=(String) comboBox_1.getSelectedItem();
+					
+					h=new ServicioEmergencia();
+					List<Especialidad> a= h.listarEspecialidad(nom);
 					Iterator<Especialidad> c=a.iterator();
 					
 					while(c.hasNext()){
@@ -111,6 +121,8 @@ public class ListaEspecialidad extends JDialog {
 		});
 		btnOk.setBounds(171, 175, 91, 23);
 		contentPanel.add(btnOk);
+		
+		
 		
 			
 		
