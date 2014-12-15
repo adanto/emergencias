@@ -21,7 +21,7 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 		int valP = -1;
 		double distP = 0;
 		int val = -1;
-		double dist = 0;
+		//double dist = 0;
 		
 		try{
 			connManager.connect();
@@ -48,16 +48,16 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			System.out.println("Estamos en el fondo");
 			throw new DAOExcepcion(e);}
 
-		System.out.println("\nAmbulancia Base: "+valB+" a distancia: "+distB);
-		System.out.println("Ambulancia Privada: "+valP+" a distancia: "+distP);
+		System.out.println("\nAmbulancia Base: "+valB+" a distancia: RAIZ("+distB+")");
+		System.out.println("Ambulancia Privada: "+valP+" a distancia: RAIZ("+distP+")");
 		
 		if(distP>=distB){
 			val=valB;
-			dist=distB;
+			//dist=distB;
 			
 		}else{
 			val=valP;
-			dist=distP;
+			//dist=distP;
 		}
 		
 		return val;

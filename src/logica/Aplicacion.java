@@ -155,6 +155,8 @@ public class Aplicacion {
 				if(em!=null){
 					System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
 					System.out.println(em.getHosp());
+				}else{
+					System.out.println("No existe la emeregencia");
 				}
 				break;
 			case 15:
