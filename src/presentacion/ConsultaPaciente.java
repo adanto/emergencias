@@ -19,6 +19,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JEditorPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.List;
 
 public class ConsultaPaciente extends JDialog {
 
@@ -49,24 +53,30 @@ public class ConsultaPaciente extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JLabel lblDni = new JLabel("DNI");
-			lblDni.setBounds(79, 27, 46, 14);
+			JLabel lblDni = new JLabel("DNI: ");
+			lblDni.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblDni.setBounds(60, 27, 46, 14);
 			contentPanel.add(lblDni);
 		}
 		{
 			textField = new JTextField();
-			textField.setBounds(103, 24, 139, 20);
+			textField.setBounds(116, 24, 150, 20);
 			contentPanel.add(textField);
 			textField.setColumns(10);
 		}
 		{
 			JLabel lblPaciente = new JLabel("Paciente: ");
-			lblPaciente.setBounds(31, 81, 62, 14);
+			lblPaciente.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblPaciente.setBounds(44, 81, 62, 14);
 			contentPanel.add(lblPaciente);
 			
 		}
 		
 		JButton button = new JButton("OK");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -74,7 +84,6 @@ public class ConsultaPaciente extends JDialog {
 					ServicioEmergencia s= new ServicioEmergencia();
 					Paciente p=s.buscarP(textField.getText());
 					if(p==null){
-						System.out.println("penenautilus");
 						AltaPacienteJDialog a=new AltaPacienteJDialog();
 						a.show();
 						dispose();
@@ -107,9 +116,13 @@ public class ConsultaPaciente extends JDialog {
 		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
-		textField_1.setBounds(92, 78, 150, 20);
+		textField_1.setBounds(116, 78, 201, 20);
 		contentPanel.add(textField_1);
 		textField_1.setColumns(10);
+		
+		List list = new List();
+		list.setBounds(207, 64, 110, 60);
+		contentPanel.add(list);
 	}
 	public void mostrar(String DNI) throws InterruptedException{
 		ServicioEmergencia s;
@@ -122,6 +135,7 @@ public class ConsultaPaciente extends JDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		}
 }

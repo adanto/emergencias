@@ -185,6 +185,14 @@ public class Aplicacion {
 				List<Emergencia> emergenciasList = emergencias.listaEmergencias();
 				for(Emergencia h : emergenciasList){
 					System.out.println(h.getCodEmergencia()+" "+h.getFecha()+" "+h.getHora()+" "+h.getLat()+" "+h.getLong());
+					Paciente pac1 = h.getPaciente();
+					System.out.println(" DNI: "+pac1.getDni()+
+							" Nombre: "+pac1.getNombre()+" Apellidos: "+pac1.getApellidos()+
+							" Dirección: "+pac1.getDireccion()+" Teléf.: "+pac1.getTelefono()+
+							" Edad: "+pac1.getEdad()+" Sexo: "+pac1.getSexo());
+					System.out.println(h.getHosp().getNombre());
+					System.out.println(h.getAmb().getNumRegistro());
+					
 				}
 			}
 		}

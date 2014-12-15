@@ -33,17 +33,6 @@ CREATE TABLE ESPECIALIDAD (
                   REFERENCES HOSPITAL (nombreH)
 );
 
-CREATE TABLE SINTOMA (
-       codSintoma CHAR(20) NOT NULL
-     , estado CHAR(10)
-     , descripcion CHAR(20)
-     , duracion DOUBLE
-     , codEsp CHAR(20)
-     , nombreH CHAR(20)
-     , PRIMARY KEY (codSintoma)
-     , CONSTRAINT FK_SINTOMA_1 FOREIGN KEY (codEsp, nombreH)
-                  REFERENCES ESPECIALIDAD (codEsp, nombreH)
-);
 
 CREATE TABLE AMBULANCIA (
        numRegistro INT NOT NULL
@@ -68,12 +57,28 @@ CREATE TABLE EMERGENCIA (
      , nombreH CHAR(20)
      , DNI CHAR(10)
      , numRegistro INT
+     , PRIMARY KEY (codEmergencia)
      , CONSTRAINT FK_EMERGENCIA_1 FOREIGN KEY (numRegistro)
                   REFERENCES AMBULANCIA (numRegistro)
      , CONSTRAINT FK_EMERGENCIA_2 FOREIGN KEY (nombreH)
                   REFERENCES HOSPITAL (nombreH)
      , CONSTRAINT FK_EMERGENCIA_3 FOREIGN KEY (DNI)
                   REFERENCES PACIENTE (DNI)
+);
+
+CREATE TABLE SINTOMA (
+       codSintoma CHAR(20) NOT NULL
+     , estado CHAR(10)
+     , descripcion CHAR(20)
+     , duracion DOUBLE
+     , codEsp CHAR(20)
+     , nombreH CHAR(20)
+     , codEmergencia CHAR(10)
+     , PRIMARY KEY (codSintoma)
+     , CONSTRAINT FK_SINTOMA_1 FOREIGN KEY (codEsp, nombreH)
+                  REFERENCES ESPECIALIDAD (codEsp, nombreH)
+     , CONSTRAINT FK_SINTOMA_2 FOREIGN KEY (codEmergencia)
+                  REFERENCES EMERGENCIA (codEmergencia)
 );
 INSERT INTO hospital VALUES ('Valencia del Mar', 'Carrer del Riu Tajo, 1', 39.4777, -0.3298)
 INSERT INTO hospital VALUES ('La Fe', 'Avenida Fernando Abril', 39.4445, -0.3768)
@@ -100,3 +105,8 @@ INSERT INTO ambulancia VALUES (1987, 'Completa', 39.972, -0.245, 'P', 'NISA', tr
 INSERT INTO ambulancia VALUES (9803, 'Quemaduras', 39.2158, -0.16556, 'P', 'AlbulSL', true, null)
 INSERT INTO ambulancia VALUES (6532, 'Samu', 39.6441, -0.1315, 'P', 'Nisa', true, null)
 INSERT INTO ambulancia VALUES (4388, 'Samu', 39.5458, -0.132, 'B', null, true, 'La Fe')
+
+
+insert into emergencia values ('emergencia1', 10, 10, '10:10', '10/10', 'La Fe', '10123456A', 283)
+insert into sintoma values('Me pica2', 'doloroso', 'dejala en blanco', '90', null, null, 'emergencia1')
+insert into sintoma values('Me pica1', 'doloroso', 'dejala en blanco', '90', null, null, 'emergencia1')

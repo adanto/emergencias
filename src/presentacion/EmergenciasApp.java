@@ -53,7 +53,7 @@ public class EmergenciasApp {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnOperador = new JMenu("operador");
+		JMenu mnOperador = new JMenu("Operador");
 		menuBar.add(mnOperador);
 		
 		JMenuItem mntmAltaPaciente = new JMenuItem("Alta paciente");
@@ -130,6 +130,13 @@ public class EmergenciasApp {
 		});
 		
 		JMenuItem mntmListarEmergencias = new JMenuItem("Listar Llamadas Emergencias");
+		mntmListarEmergencias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaEmergencias l=new listaEmergencias();
+				frame.dispose();
+				l.show();
+			}
+		});
 		mnNewMenu.add(mntmListarEmergencias);
 		
 		JSeparator separator_3 = new JSeparator();
@@ -173,7 +180,7 @@ public class EmergenciasApp {
 		
 		menuBar.add(mnSalir);
 		
-		JMenuItem mntmExit = new JMenuItem("Exit();");
+		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();

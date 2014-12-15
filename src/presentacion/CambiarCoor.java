@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 
 import logica.Ambulancia;
 import logica.ServicioEmergencia;
+import javax.swing.SwingConstants;
 
 public class CambiarCoor extends JDialog {
 
@@ -53,17 +54,20 @@ public class CambiarCoor extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNumero = new JLabel("Numero: ");
-			lblNumero.setBounds(82, 33, 46, 14);
+			lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblNumero.setBounds(48, 33, 80, 14);
 			contentPanel.add(lblNumero);
 		}
 		{
 			JLabel lblLatitud = new JLabel("Latitud: ");
-			lblLatitud.setBounds(82, 58, 46, 14);
+			lblLatitud.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblLatitud.setBounds(48, 58, 80, 14);
 			contentPanel.add(lblLatitud);
 		}
 		{
 			JLabel lblLongitud = new JLabel("Longitud: ");
-			lblLongitud.setBounds(82, 83, 57, 14);
+			lblLongitud.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblLongitud.setBounds(37, 83, 91, 14);
 			contentPanel.add(lblLongitud);
 		}
 		{
@@ -92,8 +96,9 @@ public class CambiarCoor extends JDialog {
 			textField_3.setColumns(10);
 		}
 		{
-			JLabel lblAmbulanciaModificada = new JLabel("Ambulancia Modificada");
-			lblAmbulanciaModificada.setBounds(32, 139, 127, 14);
+			JLabel lblAmbulanciaModificada = new JLabel("Ambulancia Modificada:");
+			lblAmbulanciaModificada.setHorizontalAlignment(SwingConstants.CENTER);
+			lblAmbulanciaModificada.setBounds(32, 139, 153, 14);
 			contentPanel.add(lblAmbulanciaModificada);
 		}
 		{
@@ -101,7 +106,7 @@ public class CambiarCoor extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("   OK   ");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					}

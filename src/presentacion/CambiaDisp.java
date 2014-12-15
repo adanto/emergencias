@@ -25,6 +25,7 @@ import javax.swing.JEditorPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class CambiaDisp extends JDialog {
 
@@ -49,38 +50,40 @@ public class CambiaDisp extends JDialog {
 	 * Create the dialog.
 	 */
 	public CambiaDisp() {
-		setBounds(100, 100, 450, 358);
+		setBounds(100, 100, 417, 350);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		JLabel lblNumero = new JLabel("Numero: ");
-		lblNumero.setBounds(31, 40, 68, 14);
+		lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNumero.setBounds(76, 40, 68, 14);
 		contentPanel.add(lblNumero);
 		
 		textField = new JTextField();
-		textField.setBounds(109, 37, 165, 20);
+		textField.setBounds(154, 37, 165, 20);
 		contentPanel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNuevaDisponibilidad = new JLabel("Nueva Disponibilidad: ");
-		lblNuevaDisponibilidad.setBounds(53, 91, 105, 14);
+		lblNuevaDisponibilidad.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNuevaDisponibilidad.setBounds(10, 76, 134, 14);
 		contentPanel.add(lblNuevaDisponibilidad);
 		
 		JRadioButton rdbtnDisponible = new JRadioButton("Disponible");
-		rdbtnDisponible.setBounds(72, 124, 109, 23);
+		rdbtnDisponible.setBounds(99, 107, 109, 23);
 		contentPanel.add(rdbtnDisponible);
 		
 		final JRadioButton rdbtnOcupada = new JRadioButton("Ocupada");
-		rdbtnOcupada.setBounds(183, 124, 109, 23);
+		rdbtnOcupada.setBounds(210, 107, 109, 23);
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(rdbtnOcupada);
 		bg.add(rdbtnDisponible);
 		contentPanel.add(rdbtnOcupada);
 		
-		JButton button = new JButton("OK");
-		button.addMouseListener(new MouseAdapter() {
+		JButton btnOk = new JButton("   OK   ");
+		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				try {
@@ -106,9 +109,9 @@ public class CambiaDisp extends JDialog {
 				}
 			}
 		});
-		button.setActionCommand("OK");
-		button.setBounds(311, 297, 49, 23);
-		contentPanel.add(button);
+		btnOk.setActionCommand("OK");
+		btnOk.setBounds(252, 281, 67, 23);
+		contentPanel.add(btnOk);
 		
 		JButton button_1 = new JButton("Cancel");
 			button_1.addMouseListener(new MouseAdapter() {
@@ -120,17 +123,17 @@ public class CambiaDisp extends JDialog {
 				}
 		});
 		button_1.setActionCommand("Cancel");
-		button_1.setBounds(365, 297, 67, 23);
+		button_1.setBounds(332, 281, 67, 23);
 		contentPanel.add(button_1);
 		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
-		textField_1.setBounds(72, 207, 247, 41);
+		textField_1.setBounds(99, 172, 247, 41);
 		contentPanel.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblAmbulancia = new JLabel("Ambulancia:");
-		lblAmbulancia.setBounds(31, 175, 68, 14);
+		lblAmbulancia.setBounds(76, 147, 68, 14);
 		contentPanel.add(lblAmbulancia);
 	}
 }

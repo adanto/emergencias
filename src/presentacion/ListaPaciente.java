@@ -21,10 +21,12 @@ import logica.Paciente;
 import logica.ServicioEmergencia;
 import javax.swing.ListSelectionModel;
 import java.awt.GridLayout;
+import javax.swing.JScrollPane;
 
 public class ListaPaciente extends JFrame {
 
 	private JPanel contentPane;
+	private JScrollPane scrollPane;
 	private JTable table;
 
 	/**
@@ -55,33 +57,22 @@ public class ListaPaciente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane);
 		
 		table = new JTable();
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "New column"
+				"DNI", "Nombre", "Apellidos", "Dirreccion", "Edad", "Sexo", "Telefono"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		panel.add(table);
-		DefaultTableModel mo=(DefaultTableModel) table.getModel();
+		));
+		scrollPane.setViewportView(table);
 		
 		ServicioEmergencia s=new ServicioEmergencia();
 		ConsultaPaciente c=new ConsultaPaciente();
+		DefaultTableModel mo=(DefaultTableModel) table.getModel();
 		
 		Iterator<Paciente> pa=s.getPatients();
 		while(pa.hasNext()){

@@ -36,7 +36,6 @@ public class ListaEspecialidad extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	ServicioEmergencia h;
 	private int count=0;
-
 	/**
 	 * Launch the application.
 	 */
@@ -87,7 +86,7 @@ public class ListaEspecialidad extends JDialog {
 		comboBox_1.setBounds(79, 23, 158, 17);
 		contentPanel.add(comboBox_1);
 		h=new ServicioEmergencia();
-		List<Hospital> hospital= h.getHospitales();
+		List<Hospital> hospital= h.listarHospital();
 		Iterator<Hospital> hosp=hospital.iterator();
 		while(hosp.hasNext()){
 			comboBox_1.addItem(hosp.next().getNombre());
@@ -101,7 +100,7 @@ public class ListaEspecialidad extends JDialog {
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(count>1){comboBox.removeAllItems();}
+				if(count>1){comboBox.removeAll();}
 				try {
 					count++;
 					String nom=(String) comboBox_1.getSelectedItem();

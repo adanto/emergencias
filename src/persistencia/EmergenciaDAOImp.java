@@ -156,7 +156,10 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 	public void crearEmergencia(Emergencia em) throws DAOExcepcion {	
 		try{
 			connManager.connect();
+			System.out.println("INSERT INTO EMERGENCIA (codemergencia, latitud, longitud, fecha, hora, nombreH, dni, numRegistro) VALUES ('"+em.getCodEmergencia()+"', '"+em.getLat()+"', '"+em.getLong()+"', '"+em.getFecha()+"', '"+em.getHora()+"', '"+em.getHosp().getNombre()+"', '"+em.getPaciente().getDni()+"', '"+em.getAmb().getNumRegistro()+"')");
 			connManager.updateDB("INSERT INTO EMERGENCIA (codemergencia, latitud, longitud, fecha, hora, nombreH, dni, numRegistro) VALUES ('"+em.getCodEmergencia()+"', '"+em.getLat()+"', '"+em.getLong()+"', '"+em.getFecha()+"', '"+em.getHora()+"', '"+em.getHosp().getNombre()+"', '"+em.getPaciente().getDni()+"', '"+em.getAmb().getNumRegistro()+"')");
+
+			System.out.println(em.getPaciente().getDireccion());
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);}
