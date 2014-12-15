@@ -3,7 +3,7 @@ package logica;
 import java.util.ArrayList;
 
 public class Emergencia {
-	private int codEmergencia;
+	private String codEmergencia;
 	private double longitud;
 	private double latitud;
 	private String hora;
@@ -16,7 +16,7 @@ public class Emergencia {
 	private Ambulancia ambulancia;
 	
 	
-	public Emergencia(int cod, double lon, double lat, String hora, String fecha){
+	public Emergencia(String cod, double lon, double lat, String hora, String fecha){
 		this.longitud=lon;
 		this.latitud=lat;
 		this.codEmergencia = cod;
@@ -30,7 +30,7 @@ public class Emergencia {
 	}
 	
 	
-	public int getCodEmergencia(){
+	public String getCodEmergencia(){
 		return this.codEmergencia;
 	}
 	public void setHora(String hora){

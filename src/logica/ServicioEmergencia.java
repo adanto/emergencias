@@ -72,21 +72,21 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 				e.printStackTrace();
 			};
 	}
-	public Emergencia buscarEM(int cod){
+	public Emergencia buscarEM(String text){
 		boolean encontrado = false;
 		Emergencia encont = null;
 		Emergencia pasando = null;
 		Iterator<Emergencia> iteratorcito = emergencias.listIterator();
 		while(iteratorcito.hasNext() && !encontrado){
 			pasando = iteratorcito.next();
-			if(pasando.getCodEmergencia()==cod){
+			if(pasando.getCodEmergencia()==text){
 				encontrado = true;
 				encont = pasando;
 			}
 		}
 		if(!encontrado){
 				try{
-					encont = DAL.getSingleton().buscarEmergencia(cod);
+					encont = DAL.getSingleton().buscarEmergencia(text);
 				}catch(LogicaExcepcion e)
 				{
 					e.printStackTrace();
@@ -278,7 +278,7 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 		}
 		return dbHospital;
 	}
-	
+
 	public void nombHospitales() throws LogicaExcepcion{
 		List<Hospital> hospitales = getHospitales();
 		for(Hospital h : hospitales){

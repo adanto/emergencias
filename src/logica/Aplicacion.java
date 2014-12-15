@@ -154,7 +154,7 @@ public class Aplicacion {
 				emergencias.nombHospitales();
 				break;
 			case 14:
-				Emergencia em = emergencias.buscarEM(1);
+				Emergencia em = emergencias.buscarEM("1");
 				if(em!=null){
 					System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
 					System.out.println(em.getHosp());
@@ -183,6 +183,9 @@ public class Aplicacion {
 				break;
 			case 18:
 				List<Emergencia> emergenciasList = emergencias.listaEmergencias();
+				for(Emergencia h : emergenciasList){
+					System.out.println(h.getCodEmergencia()+" "+h.getFecha()+" "+h.getHora()+" "+h.getLat()+" "+h.getLong());
+				}
 			}
 		}
 	}

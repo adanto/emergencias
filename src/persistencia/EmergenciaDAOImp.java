@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logica.*;
-import logica.Emergencia;
-import logica.Hospital;
 import excepciones.DAOExcepcion;
 
 public class EmergenciaDAOImp implements IEmergenciaDAO{
@@ -22,23 +20,31 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 	
 
 	public List <Emergencia> listaEmergencias() throws DAOExcepcion{
+
 		try{
+			
 			connManager.connect();
-			ResultSet rs=connManager.queryDB("SELECT * FROM Emergencia E, Paciente P, Hospital H, Ambulancia A WHERE E.dni = P.dni AND E.nombreH = H.nombreH AND E.numRegistro = A.numRegistro");						
+			ResultSet rs=connManager.queryDB("SELECT CODEMERGENCIA, E.LATITUD AS LATITUDEME, E.LONGITUD AS LONGITUDEME, FECHA, HORA, NOMBREH, DNI, NUMREGISTRO, NOMBRE, APELLIDOS, P.DIRECCION AS DIRECCIONPAC, TELEFONO, EDAD, SEXO, H.DIRECCION AS DIRECCIONHOSP, H.LATITUD AS LATITUDHOSP, H.LONGITUD AS LONGITUDHOSP, EQUIPO, A.LATITUD AS LATITUDAMB, A.LONGITUD AS LONGITUDAMB, DISPONIBILIDAD FROM Emergencia E, Paciente P, Hospital H, Ambulancia A WHERE E.dni = P.dni AND E.nombreH = H.nombreH AND E.numRegistro = A.numRegistro");						
+
 			connManager.close();
 	  	  
 			List<Emergencia> listaEmergencias=new ArrayList<Emergencia>();
-				
+
 			try{				
-				while (rs.next()){					
-					Emergencia a = new Emergencia(rs.getInt("E.CODEMERGENCIA"), rs.getDouble("E.LATITUD"), rs.getDouble("E.LONGITUD"), rs.getString("E.HORA"), rs.getString("E.FECHA")); 
-					Ambulancia amb = new Ambulancia(rs.getInt("A.NUMREGISTRO"), rs.getString("A.EQUIPO"), rs.getDouble("A.LATITUD"), rs.getDouble("A.LONGITUD"), rs.getBoolean("A.DISPONIBILIDAD"));
-					Paciente pac = new Paciente(rs.getString("P.DNI"), rs.getString("P.NOMBRE"), rs.getString("P.APELLIDOS"), rs.getString("P.DIRECCION"), rs.getInt("P.NUMERO"), rs.getInt("P.EDAD"), rs.getString("P.SEXO").charAt(0));
-					Hospital hosp = new Hospital(rs.getString("H.NOMBREH"), rs.getString("H.DIRECCION"), rs.getDouble("H.LATITUD"), rs.getDouble("H.LONGITUD"));
+				while (rs.next()){			
+					Emergencia a = new Emergencia(rs.getString("CODEMERGENCIA"), rs.getDouble("LATITUDEME"), rs.getDouble("LONGITUDEME"), rs.getString("HORA"), rs.getString("FECHA")); 
+
+					Ambulancia amb = new Ambulancia(rs.getInt("NUMREGISTRO"), rs.getString("EQUIPO"), rs.getDouble("LATITUDAMB"), rs.getDouble("LONGITUDAMB"), rs.getBoolean("DISPONIBILIDAD"));
+
+					Paciente pac = new Paciente(rs.getString("DNI"), rs.getString("NOMBRE"), rs.getString("APELLIDOS"), rs.getString("DIRECCIONPAC"), rs.getInt("TELEFONO"), rs.getInt("EDAD"), rs.getString("SEXO").charAt(0));
+
+					Hospital hosp = new Hospital(rs.getString("NOMBREH"), rs.getString("DIRECCIONHOSP"), rs.getDouble("LATITUDHOSP"), rs.getDouble("LONGITUDHOSP"));
+
 					a.setAmb(amb);
 					a.setPaciente(pac);
 					a.setHosp(hosp);
 					listaEmergencias.add(a);
+
 				}
 				return listaEmergencias;
 				}
@@ -157,7 +163,7 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 	}
 
 
-	public Emergencia buscarEmergencia(int numero) throws DAOExcepcion {
+	public Emergencia buscarEmergencia(String numero) throws DAOExcepcion {
 
 		try{
 			connManager.connect();
@@ -165,7 +171,7 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			connManager.close();
 		
 			if (rs.next()){
-				Emergencia a = new Emergencia(rs.getInt("CODEMERGENCIA"), rs.getDouble("LATITUD"), rs.getDouble("LONGITUD"), rs.getString("FECHA"), rs.getString("HORA"));
+				Emergencia a = new Emergencia(rs.getString("CODEMERGENCIA"), rs.getDouble("LATITUD"), rs.getDouble("LONGITUD"), rs.getString("FECHA"), rs.getString("HORA"));
 				//rs.getInt("NUMREGISTRO"),rs.getString("EQUIPO")
 				return a;
 			}
@@ -180,5 +186,8 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 }

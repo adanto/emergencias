@@ -127,14 +127,19 @@ public class DAL {
 	}
 	public List<Emergencia> listarEmergencias() throws LogicaExcepcion
 	{
+		List<Emergencia> devolver = null;
 		try
 		{
-			return(new EmergenciaDAOImp()).listarEmergencias();
+			EmergenciaDAOImp daito = new EmergenciaDAOImp();
+
+			devolver = daito.listaEmergencias();
+
 		}
 		catch (DAOExcepcion e)
 		{
 			throw new LogicaExcepcion("No se pudo listar las emergencias.");
 		}
+		return devolver;
 	}
 	
 	public void crearAmbulancia(Ambulancia a) throws DAOExcepcion 
@@ -160,10 +165,10 @@ public class DAL {
 			throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
 		}
 	}
-	public Emergencia buscarEmergencia(int numero) throws LogicaExcepcion{
+	public Emergencia buscarEmergencia(String text) throws LogicaExcepcion{
 		try{
 			emergenciaDAO = new EmergenciaDAOImp();
-			return emergenciaDAO.buscarEmergencia(numero);
+			return emergenciaDAO.buscarEmergencia(text);
 		}catch(DAOExcepcion e){
 			throw new LogicaExcepcion("No se encuentra la emergencia");
 		}
