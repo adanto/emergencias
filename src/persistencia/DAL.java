@@ -69,6 +69,16 @@ public class DAL {
 		}
 		return amb;
 	}
+	public int ambMinima(String cod) throws DAOExcepcion{
+		int amb = -1;
+		try{
+			emergenciaDAO = new EmergenciaDAOImp();
+			amb = emergenciaDAO.ambMinima(cod);
+		}catch(DAOExcepcion e){
+			throw new DAOExcepcion("No se pudo encontrar la ambulancia mínima 2.");
+		}
+		return amb;
+	}
 	public String hospMinimo(double lon, double lat) throws DAOExcepcion{
 		String amb = "-1";
 		try{

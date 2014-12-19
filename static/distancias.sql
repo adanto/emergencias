@@ -49,36 +49,134 @@ INSERT INTO EMERGENCIA VALUES ('"+em.getCodEmergencia()+"', '"+em.getLat()+"', '
 
 
 SELECT *
-FROM Emergencia E, Ambulancia A, Paciente P, Hospital H, Sintoma S, Especialidad ES
+FROM Emergencia E, Ambulancia A, Paciente P, Hospital H, Sintoma S
 WHERE E.DNI = P.DNI 
    AND E.numRegistro = A.numRegistro
    AND E.nombreH = E.nombreH
    AND E.codEmergencia = S.codEmergencia
    AND H.nombreH = E.nombreH
    AND H.nombreH IN (
-   /* Hospitales que cubren todas los sintomas */
-WHERE H.nombreH IN (
-   SELECT H1.nombreH
-      FROM Hospital H1, Especialidad ES1
-      WHERE H1.nombreH = ES1.nombreH 
-         AND       
-            NOT EXISTS (
+      SELECT H1.nombreH
+         FROM Hospital H1
+         WHERE NOT EXISTS (
                SELECT *
-               FROM Sintoma S1
-               WHERE ES1.codEsp != S1.codEsp
+               FROM SINTOMA S
+               WHERE S.codSintoma = 'Uno'
+                  AND S.codEsp NOT IN (
+                  SELECT ES.codEsp
+                  FROM Especialidad ES
+                  WHERE ES.nombreH = H1.nombreH
+               )
          )
-    )
-
-   
+   )
    AND S.codEsp = ES.codEsp
    AND ES.nombreH = H.nombreH
 
 
-SELECT * 
-FROM Hospital H
-   /* Hospitales que cubren todas los sintomas */
 
+SELECT *
+FROM Hospital H
+WHERE H.nombreH IN (
+   SELECT H1.nombreH
+      FROM Hospital H1
+      WHERE NOT EXISTS (
+            SELECT *
+            FROM SINTOMA S
+            WHERE S.codEsp NOT IN (
+               SELECT ES.codEsp
+               FROM Especialidad ES
+               WHERE ES.nombreH = H1.nombreH)
+               
+         )
+    )
 
 
 
 UPDATE sintoma SET codEsp='Cirugia' WHERE codSintoma = 'Me pica1'
+
+
+AMBULANCIAS PRIVADAS
+
+
+SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud
+FROM Ambulancia A, Hospital H
+WHERE A.tipo = 'P' AND A.disponibilidad = TRUE
+
+AND ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))=(
+
+   SELECT MIN((H1.longitud-'"+lon+"')*(H1.longitud-'"+lon+"')+(H1.latitud-'"+lat+"')*(H1.latitud-'"+lat+"'))
+
+   FROM Hospital H1
+
+   )
+
+AND ((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"'))=(
+
+   SELECT MIN((A1.longitud-'"+lon+"')*(A1.longitud-'"+lon+"')+(A1.latitud-'"+lat+"')*(A1.latitud-'"+lat+"'))
+   FROM Ambulancia A1
+   WHERE A1.tipo = 'P' AND A1.disponibilidad = TRUE
+
+   )
+
+
+AMBULANIAS BASE
+
+
+SELECT A.numRegistro, H.nombreH, ((A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')+(A.longitud'"+lon+"')*(A.longitud'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"')+(H.longitud'"+lon+"')*(H.longitud'"+lon+"')) AS Distancia 
+FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH 
+WHERE A.tipo = 'B' 
+   AND A.disponibilidad = TRUE
+   AND H.nombreH IN (
+      SELECT H1.nombreH
+         FROM Hospital H1
+         WHERE NOT EXISTS (
+               SELECT *
+               FROM SINTOMA S
+               WHERE S.codEmergencia = '"+cod+"'
+                  AND S.codEsp NOT IN (
+                  SELECT ES.codEsp
+                  FROM Especialidad ES
+                  WHERE ES.nombreH = H1.nombreH
+               )
+         )
+ORDER BY Distancia
+
+SELECT A.numRegistro, H.nombreH, ((A.latitud-1)*(A.latitud-1)+(A.longitud -2)*(A.longitud -2)+(H.latitud-1)*(H.latitud-1)+(H.longitud -2)*(H.longitud -2)) AS Distancia 
+FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH 
+WHERE A.tipo = 'B' 
+   AND A.disponibilidad = TRUE 
+   AND H.nombreH IN (
+      SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS ( 
+         SELECT * 
+         FROM SINTOMA S 
+         WHERE S.codEmergencia = '#1' 
+            AND S.codEsp NOT IN (
+               SELECT ES.codEsp 
+               FROM Especialidad ES 
+               WHERE ES.nombreH = H1.nombreH
+            )
+         )
+      )
+   ORDER BY Distancia
+
+
+
+SELECT A.numRegistro, H.nombreH, ((A.latitud-1)*(A.latitud-1)+(A.longitud-1)*(A.longitud-1)+(H.latitud-1)*(H.latitud-1)+(H.longitud-1)*(H.longitud-1)) AS Distancia 
+FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH 
+WHERE A.tipo = 'B' 
+   AND A.disponibilidad = TRUE
+   AND H.nombreH IN (
+      SELECT H1.nombreH
+         FROM Hospital H1
+         WHERE NOT EXISTS (
+               SELECT *
+               FROM SINTOMA S
+               WHERE S.codEmergencia = '#1'
+                  AND S.codEsp NOT IN (
+                  SELECT ES.codEsp
+                  FROM Especialidad ES
+                  WHERE ES.nombreH = H1.nombreH
+               )
+         )
+   )
+ORDER BY Distancia

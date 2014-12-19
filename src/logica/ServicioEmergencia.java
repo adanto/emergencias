@@ -47,6 +47,15 @@ public int ambMinima(double d, double f) throws LogicaExcepcion{
 	};
 	return amb;
 }
+public int ambMinima(String cod) throws LogicaExcepcion{
+	int amb = -1;
+	try{
+		amb = DAL.getSingleton().ambMinima(cod);
+	}catch(DAOExcepcion e){
+		e.printStackTrace();
+	};
+	return amb;
+}
 public String hospMinimo(double d, double f) throws LogicaExcepcion{
 	String amb = "-1";
 	try{
@@ -59,7 +68,18 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
 		//setBest(em);
+		em.setAmb(null);
+		em.setHosp(null);
+		
+		
 		if(buscarEM(em.getCodEmergencia())==null) {
+			try{
+
+				DAL.getSingleton().crearEmergencia(em);
+			}catch(DAOExcepcion e){
+				e.printStackTrace();
+				System.out.println("No se pudo crear la emergencia inicial");
+			}
 			
 			Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
 			if(amb!=null){

@@ -108,7 +108,13 @@ INSERT INTO ambulancia VALUES (4388, 'Samu', 39.5458, -0.132, 'B', null, true, '
 
 
 insert into paciente values ('10123456A', 'Juan', 'Martinez Gandia', 'Calle Santiago, 4 Valencia', 123456789, 50, 'H')
-insert into emergencia values ('emergencia1', 10, 10, '10:10', '10/10', 'La Fe', '10123456A', 283)
-insert into sintoma values('Me pica2', 'doloroso', 'dejala en blanco', '90', 'Traumatologia', null, 'emergencia1')
-insert into sintoma values('Me pica1', 'doloroso', 'dejala en blanco', '90', 'Cirugia', null, 'emergencia1')
+insert into paciente values ('74018484E', 'Adrian', 'Anton Tomas', 'Soprano Ana Maria 28', 626641289, 20, 'H')
+insert into paciente values ('22222222F', 'Carlos', 'Señor Carlos', 'Calle Suya 24', 123654789, 21, 'H')
+insert into paciente values ('33333333D', 'Pau', 'Ramos Talens', 'Calle del Chorizo 54', 654123987, 21, 'H')
+insert into paciente values ('44444444M', 'Mery', 'Espinoza Molina', 'Calle Juela de Mataohs 6', 963258741, 20, 'M')
+
+
+insert into emergencia values ('#1', 10, 10, '10:10', '10/10', 'La Fe', '10123456A', 283)
+insert into sintoma values('Me duele el ojo', 'Nah', 'dejala en blanco', '90', 'Traumatologia', null, '#1')
+insert into sintoma values('Se me ha caido un brazo', 'doloroso', 'dejala en blanco', '90', 'Cirugia', null, '#1')
 
