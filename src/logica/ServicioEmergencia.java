@@ -59,18 +59,30 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
 		//setBest(em);
-		if(buscarEM(em.getCodEmergencia())==null)
+		if(buscarEM(em.getCodEmergencia())==null) {
+			
+			Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
+			if(amb!=null){
+				em.setAmb(amb);
+			}
+			Hospital hosp = buscarH(hospMinimo(em.getLong(), em.getLat()));
+
+			if(hosp!=null){
+
+				em.setHosp(hosp);
+			}
+
 			try{
-				Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
-				if(amb!=null){
-					em.setAmb(amb);
-				}
 				DAL.getSingleton().crearEmergencia(em);
 				emergencias.add(em);
 			}
 			catch(DAOExcepcion e){
 				e.printStackTrace();
 			};
+		}else{
+			System.out.println("Emergencia con este codigo ya añadida");
+		};
+			
 	}
 	public Emergencia buscarEM(String text){
 		boolean encontrado = false;
@@ -86,10 +98,13 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 		}
 		if(!encontrado){
 				try{
+					System.out.println("Buscando emergencia");
 					encont = DAL.getSingleton().buscarEmergencia(text);
 				}catch(LogicaExcepcion e)
-				{
+				{	
 					e.printStackTrace();
+					System.out.println(encont);
+					return null;
 				}
 			}
 	
@@ -150,12 +165,27 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 
 	public Hospital buscarH(String nombre)
 	{
-		Hospital salida = null;
-		for(Hospital elemento: hospitales)
-		{
-			if(elemento.getNombre().equals(nombre)) { salida = elemento; }
+		boolean encontrado = false;
+		Hospital encont = null;
+		Hospital pasando = null;
+		Iterator<Hospital> iteratorcito = hospitales.listIterator();
+		while(iteratorcito.hasNext() && !encontrado){
+			pasando = iteratorcito.next();
+			if(pasando.getNombre()==nombre){
+				encontrado = true;
+				encont = pasando;
+			}
 		}
-		return salida;		
+		if(!encontrado){
+				try{
+					encont = DAL.getSingleton().buscarHospital(nombre);
+				}catch(LogicaExcepcion e)
+				{
+					e.printStackTrace();
+				}
+			}
+	
+		return encont;
 	}
 	
 	public Ambulancia buscarA(int A) throws LogicaExcepcion

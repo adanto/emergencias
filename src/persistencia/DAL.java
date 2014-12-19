@@ -94,6 +94,7 @@ public class DAL {
 	{
 		try
 		{
+
 		emergenciaDAO = new EmergenciaDAOImp();
 		emergenciaDAO.crearEmergencia(em);
 		}catch(DAOExcepcion e)
@@ -165,13 +166,27 @@ public class DAL {
 			throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
 		}
 	}
+	public Hospital buscarHospital(String nombre) throws LogicaExcepcion 
+	{
+		try{
+			hospitalDAO = new HospitalDAOImp();
+
+			return hospitalDAO.buscaHospital(nombre);
+		}catch(DAOExcepcion e)
+		{
+			throw new LogicaExcepcion("No se pudo encontrar tu ambulancia.");
+		}
+	}
 	public Emergencia buscarEmergencia(String text) throws LogicaExcepcion{
+		Emergencia emer = null;
 		try{
 			emergenciaDAO = new EmergenciaDAOImp();
-			return emergenciaDAO.buscarEmergencia(text);
+			
+			emer = emergenciaDAO.buscarEmergencia(text);
 		}catch(DAOExcepcion e){
-			throw new LogicaExcepcion("No se encuentra la emergencia");
+			throw new LogicaExcepcion("No se encuentra la emergencia por aquí abajo :I");
 		}
+		return emer;
 	}
 	
 	public void cambiarCoor(int num, float latitud, float longitud) throws DAOExcepcion 

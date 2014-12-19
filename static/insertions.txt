@@ -107,6 +107,8 @@ INSERT INTO ambulancia VALUES (6532, 'Samu', 39.6441, -0.1315, 'P', 'Nisa', true
 INSERT INTO ambulancia VALUES (4388, 'Samu', 39.5458, -0.132, 'B', null, true, 'La Fe')
 
 
+insert into paciente values ('10123456A', 'Juan', 'Martinez Gandia', 'Calle Santiago, 4 Valencia', 123456789, 50, 'H')
 insert into emergencia values ('emergencia1', 10, 10, '10:10', '10/10', 'La Fe', '10123456A', 283)
-insert into sintoma values('Me pica2', 'doloroso', 'dejala en blanco', '90', null, null, 'emergencia1')
-insert into sintoma values('Me pica1', 'doloroso', 'dejala en blanco', '90', null, null, 'emergencia1')
+insert into sintoma values('Me pica2', 'doloroso', 'dejala en blanco', '90', 'Traumatologia', null, 'emergencia1')
+insert into sintoma values('Me pica1', 'doloroso', 'dejala en blanco', '90', 'Cirugia', null, 'emergencia1')
+

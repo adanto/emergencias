@@ -40,7 +40,8 @@ public class Aplicacion {
 			System.out.println("15- Obtener el numero de ambulancia más cercano a una posición");
 			System.out.println("16- Query del caso de uso para obtener la mejor ambulancia - Testing strings");
 			System.out.println("17- Obtener el nombre del hospital más cercano a una posición");
-			System.out.println("18- Obtener la lista de emergencias\n");
+			System.out.println("18- Obtener la lista de emergencias");
+			System.out.println("19- Añadir emergencia (lets see what happen)\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -194,6 +195,10 @@ public class Aplicacion {
 					System.out.println(h.getAmb().getNumRegistro());
 					
 				}
+			case 19: 
+				Emergencia emer = new Emergencia("#1", 10, 10, "10/10", "10/10");
+				emer.setPaciente(emergencias.buscarP("10123456A"));
+				emergencias.anyadir(emer);
 			}
 		}
 	}

@@ -66,7 +66,7 @@ public class ListaEspecialidad extends JDialog {
 		}
 		
 		final JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(79, 105, 180, 22);
+		comboBox.setBounds(63, 105, 180, 22);
 		contentPanel.add(comboBox);
 		
 		JButton btnCancel = new JButton("Cancel");
