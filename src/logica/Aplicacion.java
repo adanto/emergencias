@@ -42,7 +42,7 @@ public class Aplicacion {
 			System.out.println("17- Obtener el nombre del hospital más cercano a una posición");
 			System.out.println("18- Obtener la lista de emergencias");
 			System.out.println("19- Añadir emergencia (lets see what happen)");
-			System.out.println("20- Ambulancia minima (BASE) a una emergencia (RIP)\n");
+			System.out.println("20- Ambulancias mínimas (BASE) a unas emergencias (RIP)\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
