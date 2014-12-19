@@ -73,13 +73,7 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 		
 		
 		if(buscarEM(em.getCodEmergencia())==null) {
-			try{
-
-				DAL.getSingleton().crearEmergencia(em);
-			}catch(DAOExcepcion e){
-				e.printStackTrace();
-				System.out.println("No se pudo crear la emergencia inicial");
-			}
+			
 			
 			Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
 			if(amb!=null){
@@ -118,7 +112,6 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 		}
 		if(!encontrado){
 				try{
-					System.out.println("Buscando emergencia");
 					encont = DAL.getSingleton().buscarEmergencia(text);
 				}catch(LogicaExcepcion e)
 				{	

@@ -141,23 +141,9 @@ WHERE A.tipo = 'B'
          )
 ORDER BY Distancia
 
-SELECT A.numRegistro, H.nombreH, ((A.latitud-1)*(A.latitud-1)+(A.longitud -2)*(A.longitud -2)+(H.latitud-1)*(H.latitud-1)+(H.longitud -2)*(H.longitud -2)) AS Distancia 
-FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH 
-WHERE A.tipo = 'B' 
-   AND A.disponibilidad = TRUE 
-   AND H.nombreH IN (
-      SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS ( 
-         SELECT * 
-         FROM SINTOMA S 
-         WHERE S.codEmergencia = '#1' 
-            AND S.codEsp NOT IN (
-               SELECT ES.codEsp 
-               FROM Especialidad ES 
-               WHERE ES.nombreH = H1.nombreH
-            )
-         )
-      )
-   ORDER BY Distancia
+
+CORRECTA 
+SELECT A.numRegistro, H.nombreH, ((A.latitud-1)*(A.latitud-1)+(A.longitud -2)*(A.longitud -2)+(H.latitud-1)*(H.latitud-1)+(H.longitud -2)*(H.longitud -2)) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS ( SELECT * FROM SINTOMA S WHERE S.codEmergencia = '#1' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))ORDER BY Distancia
 
 
 

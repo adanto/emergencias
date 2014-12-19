@@ -196,16 +196,23 @@ public class Aplicacion {
 					System.out.println(h.getAmb().getNumRegistro());
 					
 				}
+				break;
 			case 19:
 				List<Emergencia> emergenciasList2 = emergencias.listaEmergencias();
 				int val = emergenciasList2.size() + 1;
 				Emergencia emer = new Emergencia("#"+val+"", 10, 10, "10/10", "10/10");
 				emer.setPaciente(emergencias.buscarP("10123456A"));
 				emergencias.anyadir(emer);
+				break;
 			case 20:
-				Ambulancia amb = emergencias.buscarA(emergencias.ambMinima("#1"));
-				System.out.println(amb);
-			
+				int x = emergencias.listaEmergencias().size();
+				for(int i = 1; i<x; i++){
+					String value = "#"+i+"";
+					Ambulancia amb = emergencias.buscarA(emergencias.ambMinima(value));
+					System.out.println(amb.getNumRegistro());
+					
+				}
+				break;
 			}
 			
 		}
