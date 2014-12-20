@@ -26,7 +26,7 @@ public class SintomasDAOImp implements ISintomasDAO {
 	public void crearSintoma(Sintoma sint) throws DAOExcepcion {
 	// TODO Auto-generated method stub			
 		try{
-			connManager.connect();  //insert into sintoma 	
+			connManager.connect();  	
 			connManager.updateDB("insert into SINTOMA values ('"+sint.getNombre()+"', '"+sint.getEstado()+"','"+sint.getDescripcion()+"','"+sint.getDuracion()+"', '"+sint.getCodEsp()+"', null, '"+sint.getEmerg()+"')");
 			connManager.close();
 		}
