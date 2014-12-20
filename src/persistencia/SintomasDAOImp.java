@@ -16,12 +16,18 @@ public class SintomasDAOImp implements ISintomasDAO {
 		}
 		catch (ClassNotFoundException e){	throw new DAOExcepcion(e);}
 	}
+	public void deleteSintoma(String cod) throws DAOExcepcion{
+		
+		connManager.connect();										
+		connManager.updateDB("delete from sintoma where codemergencia = '"+cod+"'");
+		connManager.close();
+	}
 	
 	public void crearSintoma(Sintoma sint) throws DAOExcepcion {
 	// TODO Auto-generated method stub			
 		try{
-			connManager.connect();
-			connManager.updateDB("insert into SINTOMA (ESTADO, DESCRIPCION, DURACION, NOMBRE) values ('"+sint.getEstado()+"','"+sint.getDescripcion()+"','"+sint.getDuracion()+"', '"+sint.getNombre()+"')");
+			connManager.connect();  //insert into sintoma 	
+			connManager.updateDB("insert into SINTOMA values ('"+sint.getNombre()+"', '"+sint.getEstado()+"','"+sint.getDescripcion()+"','"+sint.getDuracion()+"', '"+sint.getCodEsp()+"', null, '"+sint.getEmerg()+"')");
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);}
@@ -54,7 +60,9 @@ public class SintomasDAOImp implements ISintomasDAO {
 			connManager.close();
 		
 			if (rs.next())
-				return new Sintoma(nombre, rs.getString("DESCRIPCION"), rs.getInt("DURACION"), rs.getString("ESTADO"), rs.getInt("CODEMERGENCIA"));
+				//	public Sintoma(String nombre, String desc, int duracion, String est, String emergencia, String codEsp){
+				
+				return new Sintoma(nombre, rs.getString("DESCRIPCION"), rs.getInt("DURACION"), rs.getString("ESTADO"), rs.getString("CODEMERGENCIA"), rs.getString("CODEMERGENCIA"));
 			else
 				return null;	
 		}

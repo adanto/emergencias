@@ -66,38 +66,80 @@ public String hospMinimo(double d, double f) throws LogicaExcepcion{
 	return amb;
 }
 
+
+public String hospMinimo(String cod) throws LogicaExcepcion{
+	String amb = "-1";
+	try{
+		amb = DAL.getSingleton().hospMinimo(cod);
+	}catch(DAOExcepcion e){
+		e.printStackTrace();
+	};
+	return amb;
+}
+
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
-		//setBest(em);
 		em.setAmb(null);
 		em.setHosp(null);
-		
+		ArrayList<Sintoma> sints = em.getSintomas();
 		
 		if(buscarEM(em.getCodEmergencia())==null) {
+
+			try{
+				DAL.getSingleton().crearEmergencia(em);
+			}
+			catch(DAOExcepcion e){	
+				e.printStackTrace();
+			};
+			for (Sintoma s : sints){
+				try {
+					DAL.getSingleton().crearSintoma(s);
+				} catch (DAOExcepcion e) {
+					System.out.println("Imposible añadir sintoma");
+					e.printStackTrace();
+				}
+			};
 			
-			
-			Ambulancia amb = buscarA(ambMinima(em.getLong(), em.getLat()));
+			Ambulancia amb = buscarA(ambMinima(em.getCodEmergencia()));
 			if(amb!=null){
 				em.setAmb(amb);
 			}
-			Hospital hosp = buscarH(hospMinimo(em.getLong(), em.getLat()));
-
+			
+			Hospital hosp = buscarH(hospMinimo(em.getCodEmergencia()));
 			if(hosp!=null){
-
 				em.setHosp(hosp);
 			}
-
+			for (Sintoma s : sints){
+				try {
+					DAL.getSingleton().deleteSintoma(s.getEmerg());
+				} catch (DAOExcepcion e) {
+					e.printStackTrace();
+				}
+			};
+			
+			
 			try{
+				DAL.getSingleton().deleteEmergencia(em.getCodEmergencia());
 				DAL.getSingleton().crearEmergencia(em);
 				emergencias.add(em);
 			}
 			catch(DAOExcepcion e){
 				e.printStackTrace();
 			};
+			for (Sintoma s : sints){
+				try {
+					DAL.getSingleton().crearSintoma(s);
+				} catch (DAOExcepcion e) {
+					System.out.println("Imposible añadir sintoma");
+					e.printStackTrace();
+				}
+			};
 		}else{
 			System.out.println("Emergencia con este codigo ya añadida");
 		};
-			
 	}
+		
+			
+	
 	public Emergencia buscarEM(String text){
 		boolean encontrado = false;
 		Emergencia encont = null;

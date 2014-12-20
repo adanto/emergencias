@@ -7,16 +7,21 @@ public class Sintoma {
 	private int duracion=0;
 	private String descripcion="";
 	private String nombre="";
-	private int codEmergencia;
+	private String codEmergencia;
+	private String codEsp;
 	
-	public Sintoma(String nombre, String desc, int duracion, String est, int emergencia){
+	public Sintoma(String nombre, String desc, int duracion, String est, String emergencia, String codEsp){
 		this.nombre=nombre;
 		this.descripcion=desc;
 		this.duracion = duracion;
 		this.estado=est;
 		this.codEmergencia=emergencia;
+		this.codEsp=codEsp;
 	}
-	public int getEmerg(){
+	public String getCodEsp(){
+		return this.codEsp;
+	}
+	public String getEmerg(){
 		return this.codEmergencia;
 	}
 	public String getEstado() {return estado;}

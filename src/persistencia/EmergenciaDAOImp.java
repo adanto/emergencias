@@ -52,7 +52,7 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			}
 		catch (DAOExcepcion e){		throw e;}	
 	 }
-	
+
 	public int ambMinima(String cod) throws DAOExcepcion{
 		int valB = -1;
 		double distB = 0;
@@ -85,6 +85,58 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			connManager.close();
 			if (rs.next()){
 				valP = rs.getInt("numRegistro");
+				distP = rs.getDouble("Longitud");
+			}
+		}catch (Exception e){	
+			System.out.println("Estamos en el fondo 2");
+			throw new DAOExcepcion(e);}
+
+		
+		if(distP>=distB && distB != 0){
+			val=valB;
+
+			
+		}else 
+			if(distP != 0){
+				val=valP;
+
+			}
+
+		System.out.println(distB+" "+valB+" "+distP+" "+valP+" ---> "+val);
+		return val;
+	}
+
+	public String hospMinimo(String cod) throws DAOExcepcion{
+		String valB = "null";
+		double distB = 0;
+		String valP = "null";
+		double distP = 0;
+		String val = "null";
+		Emergencia EM = buscarEmergencia(cod);
+		double lat = EM.getLat();
+		double lon = EM.getLong();
+
+		try{
+			connManager.connect();
+			String query = "SELECT A.numRegistro, H.nombreH, ((A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')+(A.longitud -'"+lon+"')*(A.longitud -'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"')+(H.longitud -'"+lon+"')*(H.longitud -'"+lon+"')) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS ( SELECT * FROM SINTOMA S WHERE S.codEmergencia = '"+cod+"' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))ORDER BY Distancia";
+			ResultSet rs=connManager.queryDB(query);
+			connManager.close();
+			if (rs.next()){
+				valB = rs.getString("nombreH");
+				distB = rs.getDouble("Distancia");
+			}
+		}catch (Exception e){	
+			System.out.println("Estamos en el fondo 1");
+			throw new DAOExcepcion(e);}
+
+		
+		try{
+			connManager.connect();
+			String query ="SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS (SELECT * FROM SINTOMA S WHERE S.codEmergencia = '"+cod+"' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))ORDER BY Longitud";
+			ResultSet rs=connManager.queryDB(query);
+			connManager.close();
+			if (rs.next()){
+				valP = rs.getString("nombreH");
 				distP = rs.getDouble("Longitud");
 			}
 		}catch (Exception e){	
@@ -199,12 +251,31 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 		return val;
 	}
 	public void crearEmergencia(Emergencia em) throws DAOExcepcion {
+		String hospital;
+		String ambulancia;
+		if(em.getHosp()!=null){
+			hospital = "'"+em.getHosp().getNombre()+"'";
+		}else{
+			hospital = null;
+		}
+		if(em.getAmb()!=null){
+			ambulancia = "'"+em.getAmb().getNumRegistro()+"'";
+		}else{
+			ambulancia = null;
+		}
+		
 		try{
 			connManager.connect();
-			connManager.updateDB("INSERT INTO EMERGENCIA VALUES ('"+em.getCodEmergencia()+"', "+em.getLat()+", "+em.getLong()+", '"+em.getFecha()+"', '"+em.getHora()+"', '"+em.getHosp().getNombre()+"', '"+em.getPaciente().getDni()+"', "+em.getAmb().getNumRegistro()+")");
+			connManager.updateDB("INSERT INTO EMERGENCIA VALUES ('"+em.getCodEmergencia()+"', "+em.getLat()+", "+em.getLong()+", '"+em.getFecha()+"', '"+em.getHora()+"', "+hospital+", '"+em.getPaciente().getDni()+"', "+ambulancia+")");
 			connManager.close();
 		}
 		catch (Exception e){	throw new DAOExcepcion(e);}
+	}
+	
+	public void deleteEmergencia(String cod) throws DAOExcepcion{
+		connManager.connect();
+		connManager.queryDB("delete from EMERGENCIA where codemergencia= '"+cod+"'");
+		connManager.close();	
 	}
 
 

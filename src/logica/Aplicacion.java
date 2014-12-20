@@ -14,7 +14,7 @@ public class Aplicacion {
 		ServicioEmergencia emergencias = new ServicioEmergencia();
 
 		System.out.println("Running app...");
-		// AQUÍ INCLUIR CADA UNA DE LAS EJECUCIONES
+		// AQUÍ INCLUIR CADA UNA DE LAS 
 		//--------------------------------------------------------------------
 		
 		int sel = 1;
@@ -42,7 +42,10 @@ public class Aplicacion {
 			System.out.println("17- Obtener el nombre del hospital más cercano a una posición");
 			System.out.println("18- Obtener la lista de emergencias");
 			System.out.println("19- Añadir emergencia (lets see what happen)");
-			System.out.println("20- Ambulancias mínimas (BASE) a unas emergencias (RIP)\n");
+			System.out.println("20- Ambulancias mínimas (BASE) a unas emergencias (RIP)");
+			System.out.println("21- Hospitales mínimos a unas emergencias (RIP)");
+			System.out.println("22- Añade una emergencia con sus sintomas y todo");
+			System.out.println("23- Delete Sintoma 'AUU'");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -200,15 +203,42 @@ public class Aplicacion {
 			case 19:
 				List<Emergencia> emergenciasList2 = emergencias.listaEmergencias();
 				int val = emergenciasList2.size() + 1;
-				Emergencia emer = new Emergencia("#"+val+"", 10, 10, "10/10", "10/10");
-				emer.setPaciente(emergencias.buscarP("10123456A"));
-				emergencias.anyadir(emer);
+				double x = (Math.random()-0.5)*10;
+				double y = (Math.random()-0.5)*10;
+				Emergencia emer1 = new Emergencia("#"+val+"", x, y, "10/10", "10/10");
+				emer1.setPaciente(emergencias.buscarP("10123456A"));
+				emergencias.anyadir(emer1);
+				
+				
 				break;
 			case 20:
 				Ambulancia amb1 = emergencias.buscarA(emergencias.ambMinima("#1"));
 				Ambulancia amb2 = emergencias.buscarA(emergencias.ambMinima("#2"));
-				System.out.println(amb1);
-				System.out.println(amb2);
+				System.out.println("Nos lo llevamos con la amb nº ---> "+amb1.getNumRegistro());
+				System.out.println("Nos lo llevamos con la amb nº ---> "+amb2.getNumRegistro());
+				break;
+			case 21:
+				Hospital hosp1 = emergencias.buscarH(emergencias.hospMinimo("#1"));
+				Hospital hosp2 = emergencias.buscarH(emergencias.hospMinimo("#2"));
+				System.out.println("Nos lo llevamos al hospital ---> "+hosp1.getNombre());
+				System.out.println("Nos lo llevamos al hospital ---> "+hosp2.getNombre());
+				break;
+			case 22: 
+				List<Emergencia> emergenciasList3 = emergencias.listaEmergencias();
+				int val2 = emergenciasList3.size() + 1;
+				double x1 = (Math.random()-0.5)*10;
+				double y1 = (Math.random()-0.5)*10;
+				Emergencia emer2 = new Emergencia("#"+val2+"", x1, y1, "10/10", "10/10");
+				emer2.setPaciente(emergencias.buscarP("10123456A"));
+				emer2.addSintoma(new Sintoma("Dolor de cabeza"+val2, "Me pica un poco el cogote", 12, "pica solo", "#"+val2, "Traumatologia"));
+				emer2.addSintoma(new Sintoma("Hinchazon"+val2, "Ojos negros", 12, "HARD", "#"+val2, "Cardiologia"));
+				emer2.addSintoma(new Sintoma("Mal olor"+val2, "Peste azul", 12, "DIE", "#"+val2, "Cirugia"));
+				emer2.addSintoma(new Sintoma("Mal olor2"+val2, "Peste azul", 12, "DIE", "#"+val2, "Diagnostico Radiologico"));
+				emergencias.anyadir(emer2);
+				System.out.println(emer2.getHosp().getNombre());
+				break;
+			case 23:
+				//emergencias.deleteSintoma("AUU");
 				break;
 			}
 			

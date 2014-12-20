@@ -9,6 +9,7 @@ import logica.Especialidad;
 import logica.Ambulancia;
 import logica.Hospital;
 import logica.Paciente;
+import logica.Sintoma;
 import excepciones.DAOExcepcion;
 import excepciones.LogicaExcepcion;
 
@@ -18,6 +19,7 @@ public class DAL {
 	IPacienteDAO pacienteDAO;
 	IAmbulanciaDAO ambulanciaDAO;
 	IHospital hospitalDAO;
+	ISintomasDAO sintomaDAO;
 	IEmergenciaDAO emergenciaDAO;
 	// constructor privado
 	private DAL() throws DAOExcepcion {
@@ -79,6 +81,16 @@ public class DAL {
 		}
 		return amb;
 	}
+	public String hospMinimo(String cod) throws DAOExcepcion{
+		String amb = "-1";
+		try{
+			emergenciaDAO = new EmergenciaDAOImp();
+			amb = emergenciaDAO.hospMinimo(cod);
+		}catch(DAOExcepcion e){
+			throw new DAOExcepcion("No se pudo encontrar el hospital mínimo 2.");
+		}
+		return amb;
+	}
 	public String hospMinimo(double lon, double lat) throws DAOExcepcion{
 		String amb = "-1";
 		try{
@@ -100,6 +112,26 @@ public class DAL {
 			throw new DAOExcepcion("No se pudo crear el paciente.");
 		}
 	}
+	public void crearSintoma(Sintoma s) throws DAOExcepcion 
+	{
+		try
+		{
+		sintomaDAO = new SintomasDAOImp();
+		sintomaDAO.crearSintoma(s);
+		}catch(DAOExcepcion e)
+		{
+			throw new DAOExcepcion("No se pudo crear el sintoma.");
+		}
+	}
+	public void deleteEmergencia(String cod) throws DAOExcepcion{
+		emergenciaDAO = new EmergenciaDAOImp();
+		emergenciaDAO.deleteEmergencia(cod);
+	}
+	public void deleteSintoma(String cod) throws DAOExcepcion{
+		sintomaDAO = new SintomasDAOImp();
+		sintomaDAO.deleteSintoma(cod);
+	}
+	
 	public void crearEmergencia(Emergencia em) throws DAOExcepcion 
 	{
 		try
