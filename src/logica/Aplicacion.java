@@ -44,8 +44,7 @@ public class Aplicacion {
 			System.out.println("19- Añadir emergencia (lets see what happen)");
 			System.out.println("20- Ambulancias mínimas (BASE) a unas emergencias (RIP)");
 			System.out.println("21- Hospitales mínimos a unas emergencias (RIP)");
-			System.out.println("22- Añade una emergencia con sus sintomas y todo");
-			System.out.println("23- Delete Sintoma 'AUU'");
+			System.out.println("22- Añade una emergencia con sus sintomas y todo\n");
 			sel = keyboard.nextInt();
 			System.out.println("");
 			
@@ -236,9 +235,6 @@ public class Aplicacion {
 				emer2.addSintoma(new Sintoma("Mal olor2"+val2, "Peste azul", 12, "DIE", "#"+val2, "Diagnostico Radiologico"));
 				emergencias.anyadir(emer2);
 				System.out.println(emer2.getHosp().getNombre());
-				break;
-			case 23:
-				//emergencias.deleteSintoma("AUU");
 				break;
 			}
 			
