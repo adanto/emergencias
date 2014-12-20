@@ -199,3 +199,7 @@ WHERE A.tipo = 'B'
          )
    )
 ORDER BY Distancia
+
+
+SELECT A.numRegistro, H.nombreH, ((A.latitud-'-4.216441012937281')*(A.latitud-'-4.216441012937281')+(A.longitud -'4.950586089993435')*(A.longitud -'4.950586089993435')+(H.latitud-'-4.216441012937281')*(H.latitud-'-4.216441012937281')+(H.longitud -'4.950586089993435')*(H.longitud -'4.950586089993435')) AS Distancia FROM Ambulancia A LEFT JOIN Hospital H ON A.nombreH = H.nombreH WHERE A.tipo = 'B' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS ( SELECT * FROM SINTOMA S WHERE S.codEmergencia = '#9' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))ORDER BY Distancia
+SELECT A.numRegistro, H.nombreH, ((H.longitud-'4.950586089993435')*(H.longitud-'4.950586089993435')+(H.latitud-'-4.216441012937281')*(H.latitud-'-4.216441012937281'))+((A.longitud-'4.950586089993435')*(A.longitud-'4.950586089993435')+(A.latitud-'-4.216441012937281')*(A.latitud-'-4.216441012937281')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS (SELECT * FROM SINTOMA S WHERE S.codEmergencia = '#9' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))
