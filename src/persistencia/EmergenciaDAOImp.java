@@ -77,11 +77,10 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			System.out.println("Estamos en el fondo 1");
 			throw new DAOExcepcion(e);}
 
-		System.out.println(valB);
 		
 		try{
 			connManager.connect();
-			String query = "SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))=(SELECT MIN((H1.longitud-'"+lon+"')*(H1.longitud-'"+lon+"')+(H1.latitud-'"+lat+"')*(H1.latitud-'"+lat+"')) FROM Hospital H1) AND ((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"'))=(SELECT MIN((A1.longitud-'"+lon+"')*(A1.longitud-'"+lon+"')+(A1.latitud-'"+lat+"')*(A1.latitud-'"+lat+"')) FROM Ambulancia A1 WHERE A1.tipo = 'P' AND A1.disponibilidad = TRUE)";
+			String query ="SELECT A.numRegistro, H.nombreH, ((H.longitud-'"+lon+"')*(H.longitud-'"+lon+"')+(H.latitud-'"+lat+"')*(H.latitud-'"+lat+"'))+((A.longitud-'"+lon+"')*(A.longitud-'"+lon+"')+(A.latitud-'"+lat+"')*(A.latitud-'"+lat+"')) AS Longitud FROM Ambulancia A, Hospital H WHERE A.tipo = 'P' AND A.disponibilidad = TRUE AND H.nombreH IN (SELECT H1.nombreH FROM Hospital H1 WHERE NOT EXISTS (SELECT * FROM SINTOMA S WHERE S.codEmergencia = '"+cod+"' AND S.codEsp NOT IN (SELECT ES.codEsp FROM Especialidad ES WHERE ES.nombreH = H1.nombreH)))";
 			ResultSet rs=connManager.queryDB(query);
 			connManager.close();
 			if (rs.next()){
@@ -93,13 +92,17 @@ public class EmergenciaDAOImp implements IEmergenciaDAO{
 			throw new DAOExcepcion(e);}
 
 		
-		if(distP>=distB){
+		if(distP>=distB && distB != 0){
 			val=valB;
+
 			
-		}else{
-			val=valP;
-		}
-		
+		}else 
+			if(distP != 0){
+				val=valP;
+
+			}
+
+		System.out.println(distB+" "+valB+" "+distP+" "+valP+" ---> "+val);
 		return val;
 	}
 	

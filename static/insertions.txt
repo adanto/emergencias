@@ -115,6 +115,14 @@ insert into paciente values ('44444444M', 'Mery', 'Espinoza Molina', 'Calle Juel
 
 
 insert into emergencia values ('#1', 10, 10, '10:10', '10/10', 'La Fe', '10123456A', 283)
-insert into sintoma values('Me duele el ojo', 'Nah', 'dejala en blanco', '90', 'Traumatologia', null, '#1')
-insert into sintoma values('Se me ha caido un brazo', 'doloroso', 'dejala en blanco', '90', 'Cirugia', null, '#1')
 
+insert into sintoma values('Me duele el ojo', 'Nah', 'dejala en blanco', '90', 'Traumatologia', null, '#1')
+insert into sintoma values('Se me ha caido un brazo', 'doloroso', 'dejala en blanco', '90', 'Cardiologia', null, '#1')
+insert into sintoma values('Picor ahi', 'picor', 'dejala en blanco', '90', 'Cirugia', null, '#1')
+insert into sintoma values('Revision', 'rev', 'dejala en blanco', '90', 'Diagnostico Radiologico', null, '#1')
+
+
+insert into emergencia values ('#2', -10, -10, '10:10', '10/10', 'La Fe', '74018484E', 283)
+insert into sintoma values('AUU', 'Nah', 'dejala en blanco', '90', 'Cirugia', null, '#2')
+insert into sintoma values('AUUUU', 'doloroso', 'dejala en blanco', '90', 'Cardiologia', null, '#2')
+insert into sintoma values('DUELEEE', 'picor', 'dejala en blanco', '90', 'Pediatria', null, '#2')

@@ -205,13 +205,10 @@ public class Aplicacion {
 				emergencias.anyadir(emer);
 				break;
 			case 20:
-				int x = emergencias.listaEmergencias().size();
-				for(int i = 1; i<x; i++){
-					String value = "#"+i+"";
-					Ambulancia amb = emergencias.buscarA(emergencias.ambMinima(value));
-					System.out.println(amb.getNumRegistro());
-					
-				}
+				Ambulancia amb1 = emergencias.buscarA(emergencias.ambMinima("#1"));
+				Ambulancia amb2 = emergencias.buscarA(emergencias.ambMinima("#2"));
+				System.out.println(amb1);
+				System.out.println(amb2);
 				break;
 			}
 			
