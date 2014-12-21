@@ -43,8 +43,8 @@ public class PacienteDAOImp implements IPacienteDAO {
 	// TODO Auto-generated method stub			
 		try{
 			connManager.connect();
-			connManager.updateDB("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
 			System.out.println("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
+			connManager.updateDB("DELETE FROM PACIENTE WHERE DNI='"+pa.getDni()+"'");
 			connManager.close();
 		}
 		catch (Exception e){	

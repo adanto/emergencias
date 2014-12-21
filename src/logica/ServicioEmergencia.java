@@ -107,9 +107,9 @@ public String hospMinimo(String cod) throws LogicaExcepcion{
  * 	1º Añade una emergencia con código y paciente
  * 	2º Añade los síntomas de esa emergencia
  * 	3º Se busca una ambulancia mínima y un hospital mínimo para añadirlos a la emergencia
- * 	4º Una vez lo tenemos, añadimos estos 2 a el objeto emergencia
+ * 	4º Una vez lo tenemos, añadimos estos 2 al objeto emergencia
  * 	5º Eliminamos los síntomas y la emergencia de la DB
- * 	6º Volvemos a añdir la emergenia (esta vez con su ambulancia y hospital) y los síntomas
+ * 	6º Volvemos a añadir la emergenia (esta vez con su ambulancia y hospital) y los síntomas
  * 
  */
 	public void anyadir(Emergencia em) throws LogicaExcepcion{
@@ -205,15 +205,15 @@ public String hospMinimo(String cod) throws LogicaExcepcion{
 	public void borrar(Paciente p) throws LogicaExcepcion
 	{
 		if(this.pacientes.containsKey(p.getDni())){
-			try{
-				pacientes.remove(p.getDni());
-				System.out.println("Hemos llegado a borrar");
-				DAL.getSingleton().borrarPaciente(p);
-				pacientes.remove(p);
-			}catch(DAOExcepcion e)
-			{	
-				e.printStackTrace();
-			}
+			pacientes.remove(p.getDni());
+		}
+
+		try {
+			DAL.getSingleton().borrarPaciente(p);
+		} catch (DAOExcepcion e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
 		}
 	}
 	public void anyadir(Paciente p) throws LogicaExcepcion
