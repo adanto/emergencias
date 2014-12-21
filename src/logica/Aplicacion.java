@@ -71,15 +71,18 @@ public class Aplicacion {
 				//Segunda ejecución
 				//Se busca un paciente y si lo encuentra se muestran sus datos
 				Paciente p1 = emergencias.buscarP("10123456A");
-				if (p1!=null)
+				if (p1!=null){
 				System.out.println(" DNI: "+p1.getDni()+
 				" Nombre: "+p1.getNombre()+" Apellidos: "+p1.getApellidos()+
 				" Dirección: "+p1.getDireccion()+" Teléf.: "+p1.getTelefono()+
 				" Edad: "+p1.getEdad()+" Sexo: "+p1.getSexo());
+				}else{
+					emergencias.anyadir(new Paciente("10123457A", "Pedro",
+							"Suecaz Santos", "Calle San Vicente, 4 Valencia", 123453251, 25,
+							'H'));
+				}
 				//Se crea un paciente
-				emergencias.anyadir(new Paciente("10123457A", "Pedro",
-				"Suecaz Santos", "Calle San Vicente, 4 Valencia", 123453251, 25,
-				'H'));
+				
 				//Se listan todos los pacientes
 				Iterator<Paciente> listaPacientes = emergencias.getPatients();
 				while(listaPacientes.hasNext()){
@@ -94,9 +97,12 @@ public class Aplicacion {
 			case 3:
 				//Tercera ejecución
 				//Se crea un paciente
-				emergencias.anyadir(new Paciente("10123458A", "Ana",
-				"Bezo Tosa", "Calle Francia, 4 Valencia", 923453251, 34, 'M'));
-				//Se listan todos los pacientes
+				if(emergencias.buscarP("10123458A")==null){
+					emergencias.anyadir(new Paciente("10123458A", "Ana",
+							"Bezo Tosa", "Calle Francia, 4 Valencia", 923453251, 34, 'M'));
+							//Se listan todos los pacientes
+							
+				}
 				Iterator<Paciente> listaPacientes3 = emergencias.getPatients();
 				while(listaPacientes3.hasNext()){
 					Paciente pac = listaPacientes3.next();
@@ -158,7 +164,7 @@ public class Aplicacion {
 				emergencias.nombHospitales();
 				break;
 			case 14:
-				Emergencia em = emergencias.buscarEM("1");
+				Emergencia em = emergencias.buscarEM("#1");
 				if(em!=null){
 					System.out.println("COD: "+em.getCodEmergencia()+", posición: ("+em.getLat()+","+em.getLong()+") a fecha de "+em.getFecha()+" "+em.getHora());
 					System.out.println(em.getHosp());
@@ -243,6 +249,7 @@ public class Aplicacion {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			
 		}
 	}

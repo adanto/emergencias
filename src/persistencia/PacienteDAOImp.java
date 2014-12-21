@@ -48,8 +48,9 @@ public class PacienteDAOImp implements IPacienteDAO {
 			connManager.close();
 		}
 		catch (Exception e){	
-			System.out.println("No se pudo eliminar desde el DAO");
-			throw new DAOExcepcion(e);}
+			System.out.println("Existe una dependencia con este paciente. Imposible eliminar");
+			//throw new DAOExcepcion(e);
+			}
 	}
 	  
 	public List <Paciente> listarPacientes() throws DAOExcepcion{
